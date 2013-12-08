@@ -6,11 +6,10 @@ let g:pylint_onwrite = 0
 "colorscheme solarized
 
 set background=dark
-"map <C-J> <C-W>j
-"map <C-K> <C-W>k
-"map <C-H> <C-W>h
-"map <C-L> <C-W>l
 map <C-K> :TmuxNavigateUp<CR>
+map <C-J> :TmuxNavigateDown<CR>
+map <C-H> :TmuxNavigateLeft<CR>
+map <C-L> :TmuxNavigateRight<CR>
 " <Tab> and <S-Tab> to switch between buffers
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
@@ -21,3 +20,11 @@ set term=xterm-256color
 " gui options to enable using the gnome clipboard \"+ and \"* registers
 set guioptions+=a
 syntax on
+
+" make Vimux have tslime capabilites, snippet from Vimux help
+function! VimuxSlime()
+  call VimuxSendText(@v)
+  call VimuxSendKeys("Enter")
+endfunction
+vmap <LocalLeader>e "vy :call VimuxSlime()<CR>
+nmap <LocalLeader>e V<LocalLeader>vs<CR>
