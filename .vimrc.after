@@ -21,10 +21,8 @@ set term=xterm-256color
 set guioptions+=a
 syntax on
 
-" make Vimux have tslime capabilites, snippet from Vimux help
-function! VimuxSlime()
-  call VimuxSendText(@v)
-  call VimuxSendKeys("Enter")
-endfunction
-vmap <LocalLeader>e "vy :call VimuxSlime()<CR>
-nmap <LocalLeader>e V<LocalLeader>vs<CR>
+" slimux bindings
+map <Leader>s :SlimuxREPLSendLine<CR>
+vmap <Leader>s :SlimuxREPLSendSelection<CR>
+map <Leader>a :SlimuxShellLast<CR>
+map <Leader>cs :SlimuxREPLConfigure<CR>
