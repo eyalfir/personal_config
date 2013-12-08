@@ -1,0 +1,9 @@
+[user]
+	name = Eyal Firstenberg
+	email = eyal.firstenberg@lightcyber.com
+[color]
+	ui = true
+[push]
+	default = tracking
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative

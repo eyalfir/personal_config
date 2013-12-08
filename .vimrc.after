@@ -1,0 +1,23 @@
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+" diable pylint
+let g:pylint_onwrite = 0
+" enable solarized colorscheme
+"colorscheme solarized
+
+set background=dark
+"map <C-J> <C-W>j
+"map <C-K> <C-W>k
+"map <C-H> <C-W>h
+"map <C-L> <C-W>l
+map <C-K> :TmuxNavigateUp<CR>
+" <Tab> and <S-Tab> to switch between buffers
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+" <Leader>s to search-replace
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+set nonumber
+set term=xterm-256color
+" gui options to enable using the gnome clipboard \"+ and \"* registers
+set guioptions+=a
+syntax on

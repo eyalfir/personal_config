@@ -1,0 +1,9 @@
+[submodule ".vim"]
+	path = .vim
+	url = https://github.com/carlhuda/janus.git
+[submodule ".janus/vim-airline"]
+	path = .janus/vim-airline
+	url = https://github.com/bling/vim-airline
+[submodule ".janus/vimux"]
+	path = .janus/vimux
+	url = git@github.com:benmills/vimux.git
