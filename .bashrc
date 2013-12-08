@@ -124,23 +124,3 @@ go() {
 }
 
 PATH=$PATH:/home/eyal/bin
-alias hailfire="ssh hailfire -L *:9090:localhost:8888 -t 'screen -x vim'"
-alias staging="ssh staging -t 'screen -x vim'"
-alias fibi="ssh fibi -t 'screen -x vim'"
-alias cellcom="ssh cellcom -L *:9090:localhost:8888 -t 'screen -x vim'"
-alias MOH="ssh MOH -L *:9090:localhost:8888 -t 'screen -x vim'"
-alias iego="ssh_to iego -L 9090:localhost:18888 -L *:8000:localhost:80 -L *:4433:localhost:443 'screen -x vim || screen -S vim'"
-
-# michael's scripts - ssh like a king
-alias ssh_to='ssh -t -X -o ProxyCommand="ssh -q kamino /home/michaelm/bin/nc_to %h"'
-alias tunnel_to='ssh -X -o ProxyCommand="ssh -q kamino /home/michaelm/bin/nc_to %h" -L443:localhost:443 -L80:localhost:80'
-copy_id_to() { cat ~/.ssh/id_dsa.pub | ssh_to $@ "cat >> .ssh/authorized_keys"; }
-alias scp_to='scp -o ProxyCommand="ssh -q kamino /home/michaelm/bin/nc_to %h"'
-alias scp_from=scp_to
-
-if [ $(hostname) = eyal-ubuntu ]; then
-  complete -W "$(ssh kamino 'cat /public/production/installations.csv' | cut -d , -f 1 | tail -n +2)" ssh_to nc_to
-  complete -W "$(ssh kamino 'cat /public/production/installations.csv' | cut -d , -f 1 | tail -n +2)" tunnel_to nc_to
-fi
-
-alias install_janus="curl -Lo- https://bit.ly/janus-bootstrap | bash"
