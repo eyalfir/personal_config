@@ -6,15 +6,16 @@ let g:pylint_onwrite = 0
 "colorscheme solarized
 
 set background=dark
+" Tmux vim navigator
 map <C-K> :TmuxNavigateUp<CR>
 map <C-J> :TmuxNavigateDown<CR>
 map <C-H> :TmuxNavigateLeft<CR>
 map <C-L> :TmuxNavigateRight<CR>
 " <Tab> and <S-Tab> to switch between buffers
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
-" <Leader>s to search-replace
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+nmap <Tab> :bnext<CR>
+nmap <S-Tab> :bprevious<CR>
+" <Leader>r to search-replace
+nmap <Leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
 set nonumber
 set term=xterm-256color
 " gui options to enable using the gnome clipboard \"+ and \"* registers
@@ -22,7 +23,16 @@ set guioptions+=a
 syntax on
 
 " slimux bindings
-map <Leader>s :SlimuxREPLSendLine<CR>
+nmap <Leader>s :SlimuxREPLSendLine<CR>
 vmap <Leader>s :SlimuxREPLSendSelection<CR>
 map <Leader>a :SlimuxShellLast<CR>
-map <Leader>cs :SlimuxREPLConfigure<CR>
+nmap <Leader>cs :SlimuxREPLConfigure<CR>
+
+" ipython bindings
+  "<Leader>ci initializes ipython
+nmap <Leader>ci :IPython<CR>:echo 'vim-ipython initiated'<CR>
+nmap <Leader>is :python run_this_line()<CR>
+nmap <Leader>if :python run_this_file()<CR>
+vmap <Leader>is :python run_these_lines()<CR>
+nmap <Leader>id :python get_doc_buffer()<CR>
+nmap <Leader>ie :python send(vim.eval('expand("<cword>")'))

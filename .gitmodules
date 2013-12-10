@@ -10,3 +10,9 @@
 [submodule ".janus/slimux"]
 	path = .janus/slimux
 	url = git@github.com:epeli/slimux.git
+[submodule ".janus/vim-ipython"]
+	path = .janus/vim-ipython
+	url = git@github.com:ivanov/vim-ipython.git
+[submodule "vim-ipython"]
+	path = vim-ipython
+	url = git@github.com:ivanov/vim-ipython.git

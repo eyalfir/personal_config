@@ -24,3 +24,5 @@ imap <f7> <C-O><f7>.
 set background=dark
 filetype plugin indent on
 call janus#disable_plugin('syntastic')
+" don't let vim-ipython perform it's own keymappings
+let g:ipy_perform_mappings = 0
