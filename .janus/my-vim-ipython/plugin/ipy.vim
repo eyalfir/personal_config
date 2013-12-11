@@ -147,9 +147,14 @@ def km_from_string(s=''):
         s = find_connection_file("")
         kernel_dir = os.path.dirname(s)
     elif not s and kernel_dir:
-        options = os.listdir(kernel_dir)
+        files = [os.path.join(kernel_dir,x) for x in os.listdir(kernel_dir)]
+        stats = {}
+        for f in files:
+            stats[f] = os.stat(f)
+        max_mtime = max([x.st_mtime for x in stats.values()])
+        options = [x for x,y in stats.items() if y.st_mtime==max_mtime]
         if len(options)==1:
-            s = os.path.join(kernel_dir, options[0])
+            s = options[0]
     print s
     #### end of change
     s = s.replace('--existing', '')
