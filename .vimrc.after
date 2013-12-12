@@ -22,10 +22,10 @@ set term=xterm-256color
 set guioptions+=a
 syntax on
 
+
 " slimux bindings
 nmap <Leader>s :SlimuxREPLSendLine<CR>
 vmap <Leader>s :SlimuxREPLSendSelection<CR>
-map <Leader>a :SlimuxShellLast<CR>
 nmap <Leader>cs :SlimuxREPLConfigure<CR>
 
 " ipython bindings

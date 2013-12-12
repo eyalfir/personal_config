@@ -16,3 +16,6 @@
 [submodule "vim-ipython"]
 	path = vim-ipython
 	url = git@github.com:ivanov/vim-ipython.git
+[submodule ".janus/vim-pythontextobj"]
+	path = .janus/vim-pythontextobj
+	url = git@github.com:natw/vim-pythontextobj.git
