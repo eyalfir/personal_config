@@ -36,3 +36,10 @@ nmap <Leader>if :python run_this_file()<CR>
 vmap <Leader>is :python run_these_lines()<CR>
 nmap <Leader>id :python get_doc_buffer()<CR>
 nmap <Leader>ie :python send(vim.eval('expand("<cword>")'))
+
+"cursor line hightlight, hopefully for the best...
+set cursorline
+highlight CursorLine ctermbg=234 cterm=None term=None
+
+" ctrlP customization
+let g:ctrlp_show_hidden = 1
