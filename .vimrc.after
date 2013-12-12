@@ -43,3 +43,7 @@ highlight CursorLine ctermbg=234 cterm=None term=None
 
 " ctrlP customization
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_extensions = ["tag"]
+unmap <C-P>
+nmap <C-P><C-P> :<C-U>CtrlP<CR>
+nmap <C-P><C-T> :<C-U>CtrlPTag<CR>
