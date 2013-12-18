@@ -22,6 +22,8 @@ set term=xterm-256color
 set guioptions+=a
 syntax on
 
+"set hidden allows switching freely between buffers
+set hidden
 
 " slimux bindings
 nmap <Leader>s :SlimuxREPLSendLine<CR>
