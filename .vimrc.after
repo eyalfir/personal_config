@@ -29,6 +29,8 @@ set hidden
 nmap <Leader>s :SlimuxREPLSendLine<CR>
 vmap <Leader>s :SlimuxREPLSendSelection<CR>
 nmap <Leader>cs :SlimuxREPLConfigure<CR>
+" send reload(module_name) when pressing <Leader>ir (ipython-reload)
+nmap <Leader>ir :call SlimuxSendCode(join(['reload(',split(split(expand("%"),"/")[-1],".py")[0],')']))<CR>
 
 " ipython bindings
   "<Leader>ci initializes ipython
@@ -39,9 +41,10 @@ vmap <Leader>is :python run_these_lines()<CR>
 nmap <Leader>id :python get_doc_buffer()<CR>
 nmap <Leader>ie :python send(vim.eval('expand("<cword>")'))
 
-"cursor line hightlight, hopefully for the best...
-set cursorline
+"cursor line hightlight
 highlight CursorLine ctermbg=234 cterm=None term=None
+au BufEnter * set cursorline
+au BufLeave * set nocursorline
 
 " ctrlP customization
 let g:ctrlp_show_hidden = 1

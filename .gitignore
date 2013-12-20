@@ -1,1 +1,4 @@
 *history.sqlite
+*swp
+.ipython*security
+.ipython*db
