@@ -7,13 +7,13 @@ let g:pylint_onwrite = 0
 
 set background=dark
 " Tmux vim navigator
-map <C-K> :TmuxNavigateUp<CR>
-map <C-J> :TmuxNavigateDown<CR>
-map <C-H> :TmuxNavigateLeft<CR>
-map <C-L> :TmuxNavigateRight<CR>
+map <silent> <C-K> :TmuxNavigateUp<CR>
+map <silent> <C-J> :TmuxNavigateDown<CR>
+map <silent> <C-H> :TmuxNavigateLeft<CR>
+map <silent> <C-L> :TmuxNavigateRight<CR>
 " <Tab> and <S-Tab> to switch between buffers
-nmap <Tab> :bnext<CR>
-nmap <S-Tab> :bprevious<CR>
+nmap <silent> <Tab> :bnext<CR>
+nmap <silent> <S-Tab> :bprevious<CR>
 " <Leader>r to search-replace
 nmap <Leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
 set nonumber
