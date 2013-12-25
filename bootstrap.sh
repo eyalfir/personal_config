@@ -13,3 +13,4 @@ do
   mv ~/${file} ~/${file}_backup
   ln -s ~/personal_config/${file} ~/${file}
 done
+ln -s ~/personal_config/.vim/janus/vim/vimrc ~/.vimrc
