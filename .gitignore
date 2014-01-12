@@ -2,3 +2,4 @@
 *swp
 .ipython*security
 .ipython*db
+.byobu/.ssh-agent
