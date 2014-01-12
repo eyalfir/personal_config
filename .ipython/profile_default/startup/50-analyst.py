@@ -6,4 +6,8 @@ try:
     print "executed analyst_ipython.py"
 except:
     print "cannot execute analyst_ipython.py"
+try:
+    get_ipython().magic('load_ext eidetic')
+except:
+    print "unable to load ipyton_eidetic"
 
