@@ -128,3 +128,5 @@ PATH=$PATH:/home/eyal/bin
 # make ctrl-s not go into a freeze
 stty ixany
 stty ixoff -ixon
+
+export PYTHONPATH=$PYTHONPATH:~/personal_config/pythonlib
