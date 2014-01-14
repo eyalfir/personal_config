@@ -1,5 +1,5 @@
 " a single back directory for all files
-set backupdir=/home/eyal/work
+set backupdir=~/work
 " make tab PEP-8 compliant
 set shiftwidth=4
 set tabstop=4
