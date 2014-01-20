@@ -3,4 +3,4 @@
 .ipython*security
 .ipython*db
 .byobu/.ssh-agent
-*.pyc
+*pyc
