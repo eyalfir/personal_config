@@ -130,3 +130,4 @@ stty ixany
 stty ixoff -ixon
 
 export PYTHONPATH=$PYTHONPATH:~/personal_config/pythonlib
+alias vim="vim -X"

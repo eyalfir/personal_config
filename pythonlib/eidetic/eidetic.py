@@ -2,6 +2,7 @@ import ast
 import _ast
 import sys
 import re
+import logging
 
 
 # Internal parsing
@@ -27,7 +28,10 @@ def parse_for_definitions(s):
     if tree and len(tree.body)!=1:
         return
     if isinstance(tree.body[0], _ast.Assign):
-        add_definition([x.id for x in tree.body[0].targets], s)
+        try:
+            add_definition([x.id for x in tree.body[0].targets], s)
+        except:
+            logging.warning("cannot part definition")
 
 def pre_prompt(ip):
     global last_traceback

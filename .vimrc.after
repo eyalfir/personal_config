@@ -2,8 +2,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 " diable pylint
 "let g:pylint_onwrite = 0
-let g:syntastic_python_checkers=["pyflakes","pylint","python"]
+"let g:syntastic_python_checkers=["pyflakes","pylint","python"]
+let g:syntastic_python_checkers=["pyflakes"]
 let g:syntastic_auto_loc_list=1
+map <Leader>cf :SyntasticToggleMode<CR>
 
 set background=dark
 " Tmux vim navigator
@@ -52,3 +54,6 @@ let g:ctrlp_extensions = ["tag"]
 unmap <C-P>
 nmap <C-P><C-P> :<C-U>CtrlP<CR>
 nmap <C-P><C-T> :<C-U>CtrlPTag<CR>
+
+" make easygrep exclude
+let g:EasyGrepFilesToExclude="*tags,*pyc"

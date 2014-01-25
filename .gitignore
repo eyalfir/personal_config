@@ -1,6 +1,6 @@
 *history.sqlite
-*swp
+*.swp
 .ipython*security
 .ipython*db
 .byobu/.ssh-agent
-*pyc
+*.pyc
