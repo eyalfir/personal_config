@@ -31,8 +31,12 @@ set hidden
 nmap <Leader>s :SlimuxREPLSendLine<CR>
 vmap <Leader>s :SlimuxREPLSendSelection<CR>
 nmap <Leader>cs :SlimuxREPLConfigure<CR>
-" send reload(module_name) when pressing <Leader>ir (ipython-reload)
-nmap <Leader>ir :call SlimuxSendCode(join(['reload(',split(split(expand("%"),"/")[-1],".py")[0],')']))<CR>
+" send reload(module_name) when pressing <Leader>im (ipython-reload)
+nmap <Leader>im :call SlimuxSendCode(join(['reload(',split(split(expand("%"),"/")[-1],".py")[0],')']))<CR>
+" send execfile(filename) when pressing <Leader>ir
+nmap <Leader>ir :call SlimuxSendCode(join(['execfile("',expand("%"),'")'], ''))<CR>
+unmap cos
+nmap cosp :call SlimuxSendCode('%cpaste\n')<CR>
 
 " ipython bindings
   "<Leader>ci initializes ipython
@@ -47,6 +51,9 @@ nmap <Leader>ie :python send(vim.eval('expand("<cword>")'))
 highlight CursorLine ctermbg=234 cterm=None term=None
 au BufEnter * set cursorline
 au BufLeave * set nocursorline
+
+" change toggle of paste mode
+set pastetoggle=cop
 
 " ctrlP customization
 let g:ctrlp_show_hidden = 1

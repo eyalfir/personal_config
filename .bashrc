@@ -131,3 +131,4 @@ stty ixoff -ixon
 
 export PYTHONPATH=$PYTHONPATH:~/personal_config/pythonlib
 alias vim="vim -X"
+alias git_pnp='git pull --rebase && git push'
