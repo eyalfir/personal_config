@@ -58,9 +58,12 @@ set pastetoggle=cop
 " ctrlP customization
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_extensions = ["tag"]
-unmap <C-P>
+silent! unmap <C-P>
 nmap <C-P><C-P> :<C-U>CtrlP<CR>
 nmap <C-P><C-T> :<C-U>CtrlPTag<CR>
+
+" fugitive shortcuts
+command GCommitLog Glog -- %
 
 " make easygrep exclude
 let g:EasyGrepFilesToExclude="*tags,*pyc"
