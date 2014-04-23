@@ -123,7 +123,7 @@ go() {
   fi
 }
 
-PATH=$PATH:/home/eyal/bin
+PATH=$PATH:/home/eyal/bin:/home/eyal/personal_config/bin
 
 # make ctrl-s not go into a freeze
 stty ixany

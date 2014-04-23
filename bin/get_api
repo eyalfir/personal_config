@@ -1,0 +1,8 @@
+#! /bin/bash
+if [[ -z $1 ]]
+then
+  curl -s --user "lightcyber" --insecure https://localhost/api/anomalies | json_pp
+else
+  curl -s --user "lightcyber:$1" --insecure https://localhost/api/anomalies | json_pp;
+fi
+
