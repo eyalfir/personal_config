@@ -133,4 +133,6 @@ export PYTHONPATH=$PYTHONPATH:~/personal_config/pythonlib
 alias vim="vim -X"
 alias git_pnp='git pull --rebase && git push'
 cd $HOME/work/lightcyber
-alias my_test='PYTHONPATH=tools:research:tools/mogo:tools/common py.test'
+alias my_test='PYTHONPATH=tools:research:tools/mogo:tools/common:tools/scripts py.test'
+alias path_me='PYTHONPATH=tools:research:tools/mogo:tools/common:tools/scripts'
+alias iwatch='/home/eyal/personal_config/pythonlib/IPWatch/ipython_with_watch.sh'
