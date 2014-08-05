@@ -14,6 +14,8 @@ definitions_stack = []
 def add_definition(targets, s):
     for target in targets:
         definitions.setdefault(target, []).append(s)
+    if definitions_stack and definitions_stack[-1] == s:
+        return
     definitions_stack.append(s)
 
 def parse_for_definitions(s):
@@ -50,14 +52,14 @@ def print_definitions_history(x):
     all_vars = [var for var in definitions.keys() if re.search("^"+x, var)]
     all_defs = set(reduce(lambda x,y:x+y, [definitions[var] for var in all_vars], []))
     try:
-        print "\n".join([x for x in definitions_stack if x in all_defs])
+        print "\n".join([i for i in definitions_stack if i in all_defs])
     except KeyError:
         print "%s not defined"%x
 
 # extension code
 
 def load_ipython_extension(ip):
-    ip.set_hook("pre_prompt_hook", pre_prompt)
+    ip.set_hook("pre_run_code_hook", pre_prompt)
     ip.register_magic_function(print_definition, magic_name="define")
     ip.register_magic_function(print_definition, magic_name="def")
     ip.register_magic_function(print_definitions_history, magic_name="hdef")
