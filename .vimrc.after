@@ -3,7 +3,7 @@ let g:airline#extensions#tagbar#enabled = 1
 " diable pylint
 "let g:pylint_onwrite = 0
 "let g:syntastic_python_checkers=["pyflakes","pylint","python"]
-let g:syntastic_python_checkers=["pyflakes"]
+let g:syntastic_python_checkers=["pyflakes",'pylint']
 let g:syntastic_auto_loc_list=1
 nmap cof :SyntasticToggleMode<CR>
 
