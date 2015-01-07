@@ -134,5 +134,7 @@ alias vim="vim -X"
 alias git_pnp='git pull --rebase && git push'
 cd $HOME/work/lightcyber
 alias my_test='PYTHONPATH=tools:research:tools/mogo:tools/common:tools/scripts py.test'
-alias path_me='PYTHONPATH=tools:research:tools/mogo:tools/common:tools/scripts'
+alias path_me='PYTHONPATH=tools:research:tools/mogo:tools/common:tools/scripts:web/rabac'
 alias iwatch='/home/eyal/personal_config/pythonlib/IPWatch/ipython_with_watch.sh'
+alias prod_ipython='PYTHONPATH=../rabac:../web:.. ipython -ic "from basic_features.all_features import *"'
+alias ping_mogo="sudo kill -USR1 `ps -e -opid -ocmd | grep '/opt/lc/bin/mogo' | grep lc | grep -v grep | cut -d' ' -f 1`"

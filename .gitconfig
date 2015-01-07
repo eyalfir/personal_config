@@ -13,3 +13,5 @@
 [http]
 [core]
 	editor = vim
+[branch]
+	autosetuprebase = always
