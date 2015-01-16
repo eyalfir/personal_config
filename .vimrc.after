@@ -91,3 +91,10 @@ au BufWritePost *.py call UpdateTags()
 
 " \\v to Ggrep
 nmap <Leader><Leader>v :Ggrep <C-r><C-w><CR><CR>:cope<CR>
+
+" \ib to add pdb breakpoint
+function InsertSettrace()
+  let br = expand("import pdb; pdb.set_trace()")
+  execute "normal o".br
+endfunction
+nmap <Leader>ib :call InsertSettrace()<CR>
