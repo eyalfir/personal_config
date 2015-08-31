@@ -3,8 +3,8 @@ let g:airline#extensions#tagbar#enabled = 1
 " diable pylint
 "let g:pylint_onwrite = 0
 "let g:syntastic_python_checkers=["pyflakes","pylint","python"]
-let g:syntastic_python_checkers=["pyflakes",'pylint']
-let g:syntastic_auto_loc_list=1
+let g:syntastic_python_checkers=["flake8", "pylint"]
+"let g:syntastic_auto_loc_list=1
 nmap cof :SyntasticToggleMode<CR>
 
 set background=dark
@@ -45,6 +45,7 @@ function! GetVisualPlus() range
     set clipboard&
     silent normal! ""gvy
     let selection = "%cpaste" . "\n" . getreg('"') . "--" . "\n"
+    "let selection = "\n" . getreg('"') . "\n"
     call setreg('"', reg_save, regtype_save)
     let &clipboard = cb_save
     return selection
@@ -87,7 +88,8 @@ let g:EasyGrepFilesToExclude="*tags,*pyc"
 function! UpdateTags()
   call system('ctags -R')
 endfunction
-au BufWritePost *.py call UpdateTags()
+" au BufWritePost *.py call UpdateTags()
+nmap <silent> <Leader>ct :call UpdateTags()<CR>
 
 " \\v to Ggrep
 nmap <Leader><Leader>v :Ggrep <C-r><C-w><CR><CR>:cope<CR>
