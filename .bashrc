@@ -78,6 +78,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
+alias ls='ls -G'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -106,9 +107,11 @@ export PYTHONSTARTUP=~/.pythonrc
 
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;36m\]\h\[\033[00m\]\[\033[01;31m\]$(git branch 2>/dev/null|grep -e ^* | tr "*" ":" | tr -d " ")\[\033[00m\]:\[\033[01;33m\]\w\[\033[00m\]> ' 
 alias prod="mysql prod -ulc -plc"
-if [ $(hostname) != eyal-ubuntu ]; then
+if [ $(hostname) != Eyals-MacBook-Pro.local ]; then
   source /opt/intel/composer_xe_2011_sp1.9.293/bin/compilervars.sh intel64
   source /opt/intel/composer_xe_2011_sp1.9.293/mkl/bin/mklvars.sh intel64
+else
+  source /Users/eyal/.bashrc_mac
 fi
 go() {
   rootdir=$(git rev-parse --show-toplevel)
@@ -123,7 +126,7 @@ go() {
   fi
 }
 
-PATH=$PATH:/home/eyal/bin:/home/eyal/personal_config/bin
+PATH=/usr/local/bin:$PATH:/home/eyal/bin:/home/eyal/personal_config/bin
 
 # make ctrl-s not go into a freeze
 stty ixany
@@ -132,9 +135,8 @@ stty ixoff -ixon
 export PYTHONPATH=$PYTHONPATH:~/personal_config/pythonlib
 alias vim="vim -X"
 alias git_pnp='git pull --rebase && git push'
-cd $HOME/work/lightcyber
-alias my_test='PYTHONPATH=tools:research:tools/mogo:tools/common:tools/scripts py.test'
 alias path_me='PYTHONPATH=tools:research:tools/mogo:tools/common:tools/scripts:web/rabac'
-alias iwatch='/home/eyal/personal_config/pythonlib/IPWatch/ipython_with_watch.sh'
+alias my_test='path_me py.test'
+alias iwatch='~/personal_config/pythonlib/IPWatch/ipython_with_watch.sh'
 alias prod_ipython='PYTHONPATH=../rabac:../web:.. ipython -ic "from basic_features.all_features import *"'
-alias ping_mogo="sudo kill -USR1 `ps -e -opid -ocmd | grep '/opt/lc/bin/mogo' | grep lc | grep -v grep | cut -d' ' -f 1`"
+alias codev='cd ~/work/lightcyber; path_me vim'
