@@ -7,22 +7,26 @@ let g:syntastic_python_checkers=["flake8", "pylint"]
 "let g:syntastic_auto_loc_list=1
 nmap cof :SyntasticToggleMode<CR>
 
+syntax enable
+set term=xterm-256color
 set background=dark
+source ~/Downloads/solarized-master/vim-colors-solarized/colors/solarized.vim
+
 " Tmux vim navigator
 map <silent> <C-K> :TmuxNavigateUp<CR>
 map <silent> <C-J> :TmuxNavigateDown<CR>
 map <silent> <C-H> :TmuxNavigateLeft<CR>
 map <silent> <C-L> :TmuxNavigateRight<CR>
 " <Tab> and <S-Tab> to switch between buffers
-nmap <silent> <Tab> :bnext<CR>
-nmap <silent> <S-Tab> :bprevious<CR>
+nmap <silent> ) :bnext<CR>
+nmap <silent> ( :bprevious<CR>
 " <Leader>r to search-replace
 nmap <Leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
 set nonumber
-set term=xterm-256color
+
 " gui options to enable using the gnome clipboard \"+ and \"* registers
 set guioptions+=a
-syntax on
+
 
 "set hidden allows switching freely between buffers
 set hidden
@@ -34,8 +38,6 @@ nmap <Leader>cs :SlimuxREPLConfigure<CR>
 nmap <Leader>im :call SlimuxSendCode(join(['reload(',split(split(expand("%"),"/")[-1],".py")[0],')']))<CR>
 " send execfile(filename) when pressing <Leader>ir
 nmap <Leader>ir :call SlimuxSendCode(join(['execfile("',expand("%"),'")'], ''))<CR>
-unmap cos
-nmap cosp :call SlimuxSendCode('%cpaste\n')<CR>
   """ ********************
   """ enable sending %cpaste and then send code
 function! GetVisualPlus() range
@@ -80,7 +82,7 @@ nmap <C-P><C-T> :<C-U>CtrlPTag<CR>
 nmap <C-P><C-O> :<C-U>CtrlPBuffer<CR>
 
 " fugitive shortcuts
-command GCommitLog Glog -- %
+command! GCommitLog Glog -- %
 
 " make easygrep exclude
 let g:EasyGrepFilesToExclude="*tags,*pyc"
@@ -95,8 +97,13 @@ nmap <silent> <Leader>ct :call UpdateTags()<CR>
 nmap <Leader><Leader>v :Ggrep <C-r><C-w><CR><CR>:cope<CR>
 
 " \ib to add pdb breakpoint
-function InsertSettrace()
+function! InsertSettrace()
   let br = expand("import pdb; pdb.set_trace()")
   execute "normal o".br
 endfunction
 nmap <Leader>ib :call InsertSettrace()<CR>
+
+" git gutter plugin toggle, and clear SignColumn background not aligned with
+" solarized colorscheme
+nmap <silent> cog :GitGutterToggle<CR>
+highlight clear SignColumn

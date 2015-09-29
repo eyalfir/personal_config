@@ -96,7 +96,7 @@ function focus(app_name, on_empty_launch, filter) {
   var apps = App.allWithTitle(app_name);
   if (_.isEmpty(apps)) {
     if (on_empty_launch === true) {
-      launch_apps(app_name)
+      launch_app(app_name)
     }
     else {
       api.alert('couldnt find app ' + app_name)
@@ -112,8 +112,13 @@ function focus(app_name, on_empty_launch, filter) {
     windows = windows.filter(filter)
   }
   if (_.isEmpty(windows)) {
-    api.alert('no such windows')
-    return
+    if (on_empty_launch === true) {
+      launch_app(app_name)
+    }
+    else {
+      api.alert('no such windows')
+      return
+    }
   }
   else {
     windows.forEach(real_focus)
@@ -124,7 +129,7 @@ function real_focus(win) {
   if (win.isWindowMinimized()) {
     win.unMinimize()
   }
-  win.focusWindow()
+  my_focus_window(win)
 }
 
 function arrange_windows(pattern, frame) {
@@ -180,19 +185,46 @@ function current_screen() {
   return win.screen()
 }
 
+function my_focus_window(win) {
+  win.focusWindow()
+  var frame = win.frame();
+  MousePosition.restore({x: frame.x + (frame.width / 2), y: frame.y + (frame.height / 2)});
+}
+
+
 var window_mgmt_modifier = ['ctrl', 'cmd']
 
 api.bind('l', ['ctrl', 'cmd', 'shift'], rightOneMonitor);
 api.bind('h', ['ctrl', 'cmd', 'shift'], leftOneMonitor);
 
+var window_aliases = {};
 
-api.bind('6', window_mgmt_modifier, function() { arrange(current_screen(), 1, 2, {name:'WhatsApp', rows:1, cols:1}, {name:'Slack', rows:1, cols:1})})
-api.bind('1', window_mgmt_modifier, function() { arrange(current_screen(), 2, 2, 
+api.bind('1', ['ctrl', 'cmd', 'shift'], function() { window_aliases['1'] = Window.focusedWindow(); });
+api.bind('2', ['ctrl', 'cmd', 'shift'], function() { window_aliases['2'] = Window.focusedWindow(); });
+api.bind('3', ['ctrl', 'cmd', 'shift'], function() { window_aliases['3'] = Window.focusedWindow(); });
+api.bind('4', ['ctrl', 'cmd', 'shift'], function() { window_aliases['4'] = Window.focusedWindow(); });
+api.bind('5', ['ctrl', 'cmd', 'shift'], function() { window_aliases['5'] = Window.focusedWindow(); });
+api.bind('6', ['ctrl', 'cmd', 'shift'], function() { window_aliases['6'] = Window.focusedWindow(); });
+api.bind('7', ['ctrl', 'cmd', 'shift'], function() { window_aliases['7'] = Window.focusedWindow(); });
+api.bind('8', ['ctrl', 'cmd', 'shift'], function() { window_aliases['8'] = Window.focusedWindow(); });
+api.bind('9', ['ctrl', 'cmd', 'shift'], function() { window_aliases['9'] = Window.focusedWindow(); });
+api.bind('1', window_mgmt_modifier, function() {my_focus_window(window_aliases['1']); });
+api.bind('2', window_mgmt_modifier, function() {my_focus_window(window_aliases['2']); });
+api.bind('3', window_mgmt_modifier, function() {my_focus_window(window_aliases['3']); });
+api.bind('4', window_mgmt_modifier, function() {my_focus_window(window_aliases['4']); });
+api.bind('5', window_mgmt_modifier, function() {my_focus_window(window_aliases['5']); });
+api.bind('6', window_mgmt_modifier, function() {my_focus_window(window_aliases['6']); });
+api.bind('7', window_mgmt_modifier, function() {my_focus_window(window_aliases['7']); });
+api.bind('8', window_mgmt_modifier, function() {my_focus_window(window_aliases['8']); });
+api.bind('9', window_mgmt_modifier, function() {my_focus_window(window_aliases['9']); });
+
+// api.bind('6', window_mgmt_modifier, function() { arrange(current_screen(), 1, 2, {name:'WhatsApp', rows:1, cols:1}, {name:'Slack', rows:1, cols:1})})
+/* api.bind('1', window_mgmt_modifier, function() { arrange(current_screen(), 2, 2, 
   {name:'lightcyber.com', rows:2, cols:1},
   {name:'Slack', rows:1, cols:1},
   null,
   {name:'WhatsApp', rows:1, cols:1}
-)})
+)}) */
 api.bind('0', window_mgmt_modifier, alert_window_name)
 api.bind('h', window_mgmt_modifier, function() { to_grid(1, 2, 0, 0, 1, 1);});
 api.bind('l', window_mgmt_modifier, function() { to_grid(1, 2, 0, 1, 1, 1);});
@@ -205,8 +237,8 @@ api.bind('m', window_mgmt_modifier, function() { to_grid(2, 2, 1, 0, 1, 1);});
 api.bind('.', window_mgmt_modifier, function() { to_grid(2, 2, 1, 1, 1, 1);});
 
 
-api.bind('c', window_mgmt_modifier, function() {focus('iTerm');});
-api.bind('b', window_mgmt_modifier , function() {focus('Google Chrome', false, function (win) {return !(win.title().match('WhatsApp'));});});
+api.bind('c', window_mgmt_modifier, function() {focus('iTerm', true);});
+api.bind('b', window_mgmt_modifier , function() {focus('Google Chrome', true, function (win) {return !(win.title().match('WhatsApp'));});});
 api.bind('s', window_mgmt_modifier , function() {focus('Slack');});
 api.bind('w', window_mgmt_modifier , function() {arrange_windows('WhatsApp');});
 

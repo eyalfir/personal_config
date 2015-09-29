@@ -126,7 +126,6 @@ go() {
   fi
 }
 
-PATH=/usr/local/bin:$PATH:/home/eyal/bin:/home/eyal/personal_config/bin
 
 # make ctrl-s not go into a freeze
 stty ixany
@@ -134,7 +133,7 @@ stty ixoff -ixon
 
 export PYTHONPATH=$PYTHONPATH:~/personal_config/pythonlib
 alias vim="vim -X"
-alias git_pnp='git pull --rebase && git push'
+alias git_pnp='git pull --rebase && ./run_tests.sh && git push'
 alias path_me='PYTHONPATH=tools:research:tools/mogo:tools/common:tools/scripts:web/rabac'
 alias my_test='path_me py.test'
 alias iwatch='~/personal_config/pythonlib/IPWatch/ipython_with_watch.sh'
