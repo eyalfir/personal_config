@@ -107,3 +107,6 @@ nmap <Leader>ib :call InsertSettrace()<CR>
 " solarized colorscheme
 nmap <silent> cog :GitGutterToggle<CR>
 highlight clear SignColumn
+
+set pastetoggle=
+noremap <silent> cop :set paste!<CR>
