@@ -19,9 +19,6 @@
 [submodule ".janus/vim-pythontextobj"]
 	path = .janus/vim-pythontextobj
 	url = git@github.com:natw/vim-pythontextobj.git
-[submodule ".janus/EasyGrep"]
-	path = .janus/EasyGrep
-	url = https://github.com/vim-scripts/EasyGrep.git
 [submodule ".janus/vim-gitgutter"]
 	path = .janus/vim-gitgutter
 	url = git@github.com:airblade/vim-gitgutter.git
