@@ -252,6 +252,9 @@ api.bind('o', window_mgmt_modifier, function() { to_grid(2, 2, 0, 1, 1, 1);});
 api.bind('m', window_mgmt_modifier, function() { to_grid(2, 2, 1, 0, 1, 1);});
 api.bind('.', window_mgmt_modifier, function() { to_grid(2, 2, 1, 1, 1, 1);});
 
+//api.bind('s', ['cmd', 'ctrl'], function() {api.alert('blue', 1000);});
+api.bind('s', ['cmd', 'shift'], function() {api.runCommand('/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine');});
+
 
 api.bind('c', window_mgmt_modifier, function() {focus('iTerm', true);});
 api.bind('b', window_mgmt_modifier , function() {focus('Google Chrome', true, function (win) {return !(win.title().match('WhatsApp'));});});
