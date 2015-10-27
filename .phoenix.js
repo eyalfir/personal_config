@@ -259,7 +259,8 @@ api.bind('s', ['cmd', 'shift'], function() {api.runCommand('/System/Library/Fram
 api.bind('c', window_mgmt_modifier, function() {focus('iTerm', true);});
 api.bind('b', window_mgmt_modifier , function() {focus('Google Chrome', true, function (win) {return !(win.title().match('WhatsApp'));});});
 api.bind('s', window_mgmt_modifier , function() {focus('Slack');});
-api.bind('w', window_mgmt_modifier , function() {arrange_windows('WhatsApp');});
+//api.bind('w', window_mgmt_modifier , function() {arrange_windows('WhatsApp');});
+api.bind('w', window_mgmt_modifier , function() {focus('ChitChat', true);});
 
 
 
