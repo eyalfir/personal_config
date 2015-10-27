@@ -199,6 +199,22 @@ api.bind('h', ['ctrl', 'cmd', 'shift'], leftOneMonitor);
 
 var window_aliases = {};
 
+var last_session = {last:[]};
+
+
+function store_last_session() {
+  var lasti = [];
+  Window.allWindows().forEach(function (win) {lasti.push({w: win, r: win.frame()});});
+  last_session.last = lasti;
+  api.alert('Session saved');
+}
+
+function restore_last_session() {
+  for (i = 0; i < last_session.last.length; i++) {
+    last_session.last[i].w.setFrame(last_session.last[i].r);
+  }
+}
+
 api.bind('1', ['ctrl', 'cmd', 'shift'], function() { window_aliases['1'] = Window.focusedWindow(); });
 api.bind('2', ['ctrl', 'cmd', 'shift'], function() { window_aliases['2'] = Window.focusedWindow(); });
 api.bind('3', ['ctrl', 'cmd', 'shift'], function() { window_aliases['3'] = Window.focusedWindow(); });
@@ -207,7 +223,7 @@ api.bind('5', ['ctrl', 'cmd', 'shift'], function() { window_aliases['5'] = Windo
 api.bind('6', ['ctrl', 'cmd', 'shift'], function() { window_aliases['6'] = Window.focusedWindow(); });
 api.bind('7', ['ctrl', 'cmd', 'shift'], function() { window_aliases['7'] = Window.focusedWindow(); });
 api.bind('8', ['ctrl', 'cmd', 'shift'], function() { window_aliases['8'] = Window.focusedWindow(); });
-api.bind('9', ['ctrl', 'cmd', 'shift'], function() { window_aliases['9'] = Window.focusedWindow(); });
+api.bind('9', ['ctrl', 'cmd', 'shift'], function() { store_last_session(); });
 api.bind('1', window_mgmt_modifier, function() {my_focus_window(window_aliases['1']); });
 api.bind('2', window_mgmt_modifier, function() {my_focus_window(window_aliases['2']); });
 api.bind('3', window_mgmt_modifier, function() {my_focus_window(window_aliases['3']); });
@@ -216,7 +232,7 @@ api.bind('5', window_mgmt_modifier, function() {my_focus_window(window_aliases['
 api.bind('6', window_mgmt_modifier, function() {my_focus_window(window_aliases['6']); });
 api.bind('7', window_mgmt_modifier, function() {my_focus_window(window_aliases['7']); });
 api.bind('8', window_mgmt_modifier, function() {my_focus_window(window_aliases['8']); });
-api.bind('9', window_mgmt_modifier, function() {my_focus_window(window_aliases['9']); });
+api.bind('9', window_mgmt_modifier, function() {restore_last_session(); });
 
 // api.bind('6', window_mgmt_modifier, function() { arrange(current_screen(), 1, 2, {name:'WhatsApp', rows:1, cols:1}, {name:'Slack', rows:1, cols:1})})
 /* api.bind('1', window_mgmt_modifier, function() { arrange(current_screen(), 2, 2, 
