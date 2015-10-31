@@ -70,9 +70,6 @@ highlight CursorLine ctermbg=234 cterm=None term=None
 au BufEnter * set cursorline
 au BufLeave * set nocursorline
 
-" change toggle of paste mode
-set pastetoggle=cop
-
 " ctrlP customization
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_extensions = ["tag"]
@@ -110,3 +107,9 @@ highlight clear SignColumn
 
 set pastetoggle=
 noremap <silent> cop :set paste!<CR>
+
+
+" post comments to jira directly from vim using jiracli
+" see https://github.com/toabctl/jiracli
+vmap \j :w !jiracli --issue-comment-add 
+nmap \j :%w !jiracli --issue-comment-add 
