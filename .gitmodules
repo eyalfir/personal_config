@@ -1,6 +1,3 @@
 [submodule ".janus/vim-ipython"]
 	path = .janus/vim-ipython
 	url = git@github.com:ivanov/vim-ipython.git
-[submodule "vim-ipython"]
-	path = vim-ipython
-	url = git@github.com:ivanov/vim-ipython.git
