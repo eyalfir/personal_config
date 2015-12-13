@@ -140,8 +140,5 @@ nnoremap <leader>l :copen<CR>
 
 nnoremap <silent> <leader>m :GundoToggle<CR>
 
-let NERDTreeIgnore=['\.pyc$']
-let g:ctrlp_custom_ignore = '\v\.(git|pyc|pcap|expected|ps1|no_file)$'
-
 nnoremap <leader><leader>r :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader><leader>e :e ~/.config/nvim/init.vim<CR>
