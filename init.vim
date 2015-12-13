@@ -142,3 +142,6 @@ nnoremap <silent> <leader>m :GundoToggle<CR>
 
 nnoremap <leader><leader>r :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader><leader>e :e ~/.config/nvim/init.vim<CR>
+
+nnoremap <leader>j :w! /tmp/.vim_to_jira<CR>:!jiracli -m "$(cat /tmp/.vim_to_jira)" --issue-comment-add 
+vnoremap <leader>j :w! /tmp/.vim_to_jira<CR>:!jiracli -m "$(cat /tmp/.vim_to_jira)" --issue-comment-add 
