@@ -39,15 +39,14 @@ vmap <silent> <Leader>c :call SurroundWithCode()<CR>
 nmap <Leader>s :SlimuxREPLSendLine<CR>
 nmap <Leader>cs :SlimuxREPLConfigure<CR>
 
-" send reload(module_name) when pressing <Leader>im (ipython-reload)
-nmap <Leader>im :call SlimuxSendCode(join(['reload(',split(split(expand("%"),"/")[-1],".py")[0],')']))<CR>
 " send execfile(filename) when pressing <Leader>ir
 nmap <Leader>ir :call SlimuxSendCode(join(['execfile("',expand("%"),'")'], ''))<CR>
-"let g:slimux_select_from_current_window = 1
-"let g:slimux_exclude_vim_pane = 1
-"let g:slimux_filter_out_panes = 'SYNCING'
-  """ ********************
-  """ enable sending %cpaste and then send code
+let g:slimux_select_from_current_window = 1
+let g:slimux_exclude_vim_pane = 1
+let g:slimux_filter_out_panes = 'SYNCING'
+
+""" ********************
+""" enable sending %cpaste and then send code
 function! GetVisualPlus() range
     let reg_save = getreg('"')
     let regtype_save = getregtype('"')
@@ -73,6 +72,8 @@ set nocursorline
 " ctrlP customization
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_extensions = ["tag"]
+let g:ctrlp_custom_ignore = '\v\.(git|pyc|pcap|expected|ps1|no_file)$'
+
 silent! unmap <C-P>
 nmap <C-P><C-P> :<C-U>CtrlP<CR>
 nmap <C-P><C-T> :<C-U>CtrlPTag<CR>
@@ -80,6 +81,14 @@ nmap <C-P><C-O> :<C-U>CtrlPBuffer<CR>
 
 " fugitive shortcuts
 command! GCommitLog Glog -- %
+" \\v to Ggrep
+nmap <Leader><Leader>v :Ggrep <C-r><C-w><CR><CR>:cope<CR>
+nmap <silent> <leader>gb :Gblame<CR>
+nmap <silent> <leader>gs :Gstatus<CR>
+nmap <silent> <leader>gd :Gdiff<CR>
+nmap <silent> <leader>gl :Glog<CR>
+nmap <silent> <leader>gc :Gcommit<CR>
+
 
 function! UpdateTags()
   call system('ctags -R')
@@ -87,8 +96,6 @@ endfunction
 " au BufWritePost *.py call UpdateTags()
 nmap <silent> <Leader>ct :call UpdateTags()<CR>:echo "Tags Updated!"<CR>
 
-" \\v to Ggrep
-nmap <Leader><Leader>v :Ggrep <C-r><C-w><CR><CR>:cope<CR>
 
 " \ib to add pdb breakpoint
 function! InsertSettrace()
@@ -117,15 +124,9 @@ set mouse=
 
 " bind NERDTree
 nmap <silent> <leader>n :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\.pyc$']
 
 nmap <silent> <leader>rt :TagbarOpen<CR>
-
-" fugitive bindings
-nmap <silent> <leader>gb :Gblame<CR>
-nmap <silent> <leader>gs :Gstatus<CR>
-nmap <silent> <leader>gd :Gdiff<CR>
-nmap <silent> <leader>gl :Glog<CR>
-nmap <silent> <leader>gc :Gcommit<CR>
 
 " git gutter plugin toggle, and clear SignColumn background not aligned with
 " solarized colorscheme
