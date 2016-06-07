@@ -1,9 +1,9 @@
 source ~/.config/nvim/my_plugins.vim
 
 syntax enable
-
 set background=dark
-source ~/Downloads/solarized-master/vim-colors-solarized/colors/solarized.vim
+colorscheme solarized
+
 " a single back directory for all files
 set backupdir=~/work
 
