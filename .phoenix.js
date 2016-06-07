@@ -253,12 +253,14 @@ api.bind('m', window_mgmt_modifier, function() { to_grid(2, 2, 1, 0, 1, 1);});
 api.bind('.', window_mgmt_modifier, function() { to_grid(2, 2, 1, 1, 1, 1);});
 
 //api.bind('s', ['cmd', 'ctrl'], function() {api.alert('blue', 1000);});
-api.bind('s', ['cmd', 'shift'], function() {api.runCommand('/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine');});
+api.bind('s', ['cmd', 'shift'], function() {api.runCommand('/Users/eyal/bin/stop_wifi_and_sleep.sh');});
+api.bind('x', ['cmd', 'shift'], function() {api.runCommand('/Users/eyal/bin/start_wifi.sh');});
+api.bind('l', ['cmd', 'shift'], function() {api.runCommand('/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine');});
 
 
 api.bind('c', window_mgmt_modifier, function() {focus('iTerm', true);});
-api.bind('b', window_mgmt_modifier , function() {focus('Google Chrome', true, function (win) {return !(win.title().match('WhatsApp'));});});
-api.bind('s', window_mgmt_modifier , function() {focus('Slack');});
+api.bind('b', window_mgmt_modifier , function() {focus('Google Chrome', false, function (win) {return !(win.title().match('WhatsApp'));});});
+api.bind('s', window_mgmt_modifier , function() {focus('Slack', true);});
 //api.bind('w', window_mgmt_modifier , function() {arrange_windows('WhatsApp');});
 api.bind('w', window_mgmt_modifier , function() {focus('ChitChat', true);});
 
