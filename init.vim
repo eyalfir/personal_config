@@ -115,6 +115,11 @@ let g:airline_section_y = ''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 
+" configure unite
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <silent> <C-p><C-s> :Unite -start-insert tmuxcomplete<CR>
+nnoremap <silent> <C-p><C-l> :Unite -start-insert tmuxcomplete/lines<CR>
+
 " paste toggle sane
 set pastetoggle=
 noremap <silent> cop :set paste!<CR>
@@ -125,23 +130,39 @@ set mouse=
 " bind NERDTree
 nmap <silent> <leader>n :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.pyc$']
+nnoremap <silent> <leader>d :NERDTreeFind<CR>
 
 nmap <silent> <leader>rt :TagbarOpen<CR>
 
 " git gutter plugin toggle, and clear SignColumn background not aligned with
 " solarized colorscheme
+let g:gitgutter_notify_toggle = 1
 nmap <silent> cog :GitGutterToggle<CR>
 highlight clear SignColumn
 
 autocmd! BufWritePost * Neomake
 
-nnoremap <leader>q :copen<CR>
-nnoremap <leader>l :copen<CR>
-
-nnoremap <silent> <leader>m :GundoToggle<CR>
+nnoremap <silent> <leader>m :MundoToggle<CR>
 
 nnoremap <leader><leader>r :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader><leader>e :e ~/.config/nvim/init.vim<CR>
+nnoremap <leader><leader><leader>e :e ~/.config/nvim/my_plugins.vim<CR>
 
 nnoremap <leader>j :w! /tmp/.vim_to_jira<CR>:!jiracli -m "$(cat /tmp/.vim_to_jira)" --issue-comment-add 
 vnoremap <leader>j :w! /tmp/.vim_to_jira<CR>:!jiracli -m "$(cat /tmp/.vim_to_jira)" --issue-comment-add 
+
+" I usually name my mako template files with .template extension
+au BufRead,BufNewFile *.template set filetype=mako
+
+" UltiSnips configuration
+nnoremap <silent> cs :UltiSnipsEdit<CR>
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<a-n>"
+let g:UltiSnipsJumpBackwardTrigger="<a-p>"
+
+" specific for features
+vnoremap cf :!PYTHONPATH=/Library/Python/2.7/site-packages python /Users/eyal/bin/canonalize_dataframe_decorator.py<CR>
+
+" slack visual selection with \ts
+vnoremap <leader>ts :w! /tmp/send_to_slack<CR>:terminal python /Users/eyal/bin/interactive_slack.py /tmp/send_to_slack<CR>
+nnoremap <leader>ts :w! /tmp/send_to_slack<CR>:terminal python /Users/eyal/bin/interactive_slack.py /tmp/send_to_slack<CR>
