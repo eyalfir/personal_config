@@ -215,14 +215,16 @@ function restore_last_session() {
   }
 }
 
-api.bind('1', ['ctrl', 'cmd', 'shift'], function() { window_aliases['1'] = Window.focusedWindow(); });
-api.bind('2', ['ctrl', 'cmd', 'shift'], function() { window_aliases['2'] = Window.focusedWindow(); });
-api.bind('3', ['ctrl', 'cmd', 'shift'], function() { window_aliases['3'] = Window.focusedWindow(); });
-api.bind('4', ['ctrl', 'cmd', 'shift'], function() { window_aliases['4'] = Window.focusedWindow(); });
-api.bind('5', ['ctrl', 'cmd', 'shift'], function() { window_aliases['5'] = Window.focusedWindow(); });
-api.bind('6', ['ctrl', 'cmd', 'shift'], function() { window_aliases['6'] = Window.focusedWindow(); });
-api.bind('7', ['ctrl', 'cmd', 'shift'], function() { window_aliases['7'] = Window.focusedWindow(); });
-api.bind('8', ['ctrl', 'cmd', 'shift'], function() { window_aliases['8'] = Window.focusedWindow(); });
+api.bind('1', ['ctrl', 'cmd', 'shift'], function() { window_aliases['1'] = Window.focusedWindow(); api.alert('saved alias'); });
+api.bind('2', ['ctrl', 'cmd', 'shift'], function() { window_aliases['2'] = Window.focusedWindow(); api.alert('saved alias'); });
+api.bind('3', ['ctrl', 'cmd', 'shift'], function() { window_aliases['3'] = Window.focusedWindow(); api.alert('saved alias'); });
+api.bind('4', ['ctrl', 'cmd', 'shift'], function() { window_aliases['4'] = Window.focusedWindow(); api.alert('saved alias'); });
+api.bind('5', ['ctrl', 'cmd', 'shift'], function() { window_aliases['5'] = Window.focusedWindow(); api.alert('saved alias'); });
+api.bind('6', ['ctrl', 'cmd', 'shift'], function() { window_aliases['6'] = Window.focusedWindow(); api.alert('saved alias'); });
+api.bind('7', ['ctrl', 'cmd', 'shift'], function() { window_aliases['7'] = Window.focusedWindow(); api.alert('saved alias'); });
+api.bind('8', ['ctrl', 'cmd', 'shift'], function() { window_aliases['8'] = Window.focusedWindow(); api.alert('saved alias'); });
+api.bind('m', ['ctrl', 'cmd', 'shift'], function() { var win = Window.focusedWindow(); win.minimize() });
+//api.bind('m', ['ctrl', 'cmd', 'shift'], function() { var win = Window.focusedWindow(); win.setFrame({x: 1, y: 1, width: 1, height: 1})});
 api.bind('9', ['ctrl', 'cmd', 'shift'], function() { store_last_session(); });
 api.bind('1', window_mgmt_modifier, function() {my_focus_window(window_aliases['1']); });
 api.bind('2', window_mgmt_modifier, function() {my_focus_window(window_aliases['2']); });
@@ -251,6 +253,9 @@ api.bind('u', window_mgmt_modifier, function() { to_grid(2, 2, 0, 0, 1, 1);});
 api.bind('o', window_mgmt_modifier, function() { to_grid(2, 2, 0, 1, 1, 1);});
 api.bind('m', window_mgmt_modifier, function() { to_grid(2, 2, 1, 0, 1, 1);});
 api.bind('.', window_mgmt_modifier, function() { to_grid(2, 2, 1, 1, 1, 1);});
+api.bind('p', window_mgmt_modifier, function() { to_grid(3, 1, 0, 0, 1, 1);});
+api.bind(';', window_mgmt_modifier, function() { to_grid(3, 1, 1, 0, 1, 1);});
+api.bind('/', window_mgmt_modifier, function() { to_grid(3, 1, 2, 0, 1, 1);});
 
 //api.bind('s', ['cmd', 'ctrl'], function() {api.alert('blue', 1000);});
 api.bind('s', ['cmd', 'shift'], function() {api.runCommand('/Users/eyal/bin/stop_wifi_and_sleep.sh');});
@@ -259,6 +264,7 @@ api.bind('l', ['cmd', 'shift'], function() {api.runCommand('/System/Library/Fram
 
 
 api.bind('c', window_mgmt_modifier, function() {focus('iTerm', true);});
+api.bind('a', window_mgmt_modifier, function() {focus('Calendar', true);});
 api.bind('b', window_mgmt_modifier , function() {focus('Google Chrome', false, function (win) {return !(win.title().match('WhatsApp'));});});
 api.bind('s', window_mgmt_modifier , function() {focus('Slack', true);});
 //api.bind('w', window_mgmt_modifier , function() {arrange_windows('WhatsApp');});

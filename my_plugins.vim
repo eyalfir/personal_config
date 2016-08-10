@@ -19,6 +19,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'milkypostman/vim-togglelist' " toggle quickfix/location list with simple mapping
 	Plug 'wellle/tmux-complete.vim' " complete from words in other buffers
         Plug 'Shougo/unite.vim' " unite interface for general lists
+	Plug 'tmux-plugins/vim-tmux-focus-events'
 
 call plug#end()
 
