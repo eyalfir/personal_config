@@ -40,12 +40,10 @@ Key.on('/', window_mgmt_modifier, function() { to_grid(3, 1, 2, 0, 1, 1);});
 function rotateMonitors(offset) {
   var win = Window.focused();
   var currentScreen = win.screen();
-  var current_idx = _(Screen.all()).indexOf(currentScreen);
-  Phoenix.log(current_idx);
-  Phoenix.log(Screen.all().length);
-  var new_idx = (current_idx + offset + Screen.all().length) % (Screen.all().length);
-  Phoenix.log(new_idx);
-  var new_screen = Screen.all()[new_idx];
+  var all_screens = _.sortBy(Screen.all(), function (a) { return a.frame().x; } );
+  var current_idx = _(all_screens).indexOf(currentScreen);
+  var new_idx = (current_idx + offset + all_screens.length) % (all_screens.length);
+  var new_screen = all_screens[new_idx];
   win.setFrame(new_screen.flippedVisibleFrame());
 }
 
