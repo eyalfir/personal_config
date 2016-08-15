@@ -1,5 +1,5 @@
 
-// place focused window in a tile in current screen
+// ***** place focused window in a tile in current screen
 
 function get_grid_rect(screen, grid_rows, grid_cols, to_row, to_col, rows, cols) {
   var screen_frame = screen.flippedVisibleFrame()
@@ -73,3 +73,41 @@ Key.on('a', window_mgmt_modifier, function() { focus('Calendar'); } )
 Key.on('s', ['cmd', 'shift'], function() {Task.run('/Users/eyal/bin/stop_wifi_and_sleep.sh');});
 Key.on('x', ['cmd', 'shift'], function() {Task.run('/Users/eyal/bin/start_wifi.sh');});
 Key.on('l', ['cmd', 'shift'], function() {Task.run('/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine');});
+
+
+// ***** save and restore full window session
+
+var last_session = {last:[]};
+
+
+function store_last_session() {
+  var lasti = [];
+  Window.all().forEach(function (win) {lasti.push({w: win, r: win.frame()});});
+  last_session.last = lasti;
+  Phoenix.notify('Session saved');
+}
+
+function restore_last_session() {
+  for (i = 0; i < last_session.last.length; i++) {
+    last_session.last[i].w.setFrame(last_session.last[i].r);
+  }
+}
+
+Key.on('9', ['ctrl', 'cmd', 'shift'], function() { store_last_session(); });
+Key.on('9', window_mgmt_modifier, function() {restore_last_session(); });
+
+// ***** bring a specific window to focus on main screen
+
+var main_screen = { main: undefined };
+
+function set_main_screen() {
+  main_screen.main = Window.focused().screen()
+  Phoenix.notify('main screen set')
+}
+
+function focus_to_main_screen() {
+  var frame = main_screen.main.flippedVisibleFrame();
+  Window.focused().setFrame(frame);
+}
+Key.on('f', ['ctrl', 'cmd', 'shift'], function() { set_main_screen(); });
+Key.on('f', window_mgmt_modifier, function() { focus_to_main_screen(); });
