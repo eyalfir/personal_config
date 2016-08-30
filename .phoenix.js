@@ -99,15 +99,25 @@ Key.on('9', window_mgmt_modifier, function() {restore_last_session(); });
 // ***** bring a specific window to focus on main screen
 
 var main_screen = { main: undefined };
+var in_main_focus = {}
 
 function set_main_screen() {
-  main_screen.main = Window.focused().screen()
+  //main_screen.main = Window.focused().screen()
+  Storage.set('main_screen_frame', Window.focused().screen().flippedVisibleFrame())
   Phoenix.notify('main screen set')
 }
 
 function focus_to_main_screen() {
-  var frame = main_screen.main.flippedVisibleFrame();
-  Window.focused().setFrame(frame);
+  //var frame = main_screen.main.flippedVisibleFrame();
+  var win = Window.focused()
+  if ( win in in_main_focus ) {
+    win.setFrame(in_main_focus[win])
+    delete in_main_focus[win]
+  } else {
+    in_main_focus[win] = win.frame()
+    var frame = Storage.get('main_screen_frame')
+    Window.focused().setFrame(frame);
+  }
 }
 Key.on('f', ['ctrl', 'cmd', 'shift'], function() { set_main_screen(); });
 Key.on('f', window_mgmt_modifier, function() { focus_to_main_screen(); });
