@@ -111,3 +111,40 @@ function focus_to_main_screen() {
 }
 Key.on('f', ['ctrl', 'cmd', 'shift'], function() { set_main_screen(); });
 Key.on('f', window_mgmt_modifier, function() { focus_to_main_screen(); });
+
+// ******* store session with app names and exact frames
+
+function restore_app_session() {
+  session = Storage.get('last_session')
+  for (app_name in session) {
+    focus(app_name);
+    var app = App.get(app_name);
+    var win = app.mainWindow();
+    win.setFrame(session[app_name]);
+  }
+}
+
+function get_app_state(win) {
+	var app_name = win.app().name();
+	return {name: app_name, frame: win.frame()};
+}
+function create_app_session() {
+  session = {}
+  var all_apps = App.all()
+  for (i = 0; i < all_apps.length; i++) {
+	  app = all_apps[i]
+	  if (app.mainWindow().frame().width == 0) continue;
+	  session[app.name()] = app.mainWindow().frame()
+  }
+  Storage.set('last_session', session)
+  Phoenix.notify('app session saved')
+  Phoenix.log('app session saved')
+  Phoenix.log(JSON.stringify(session))
+}
+	
+
+Key.on('r', window_mgmt_modifier, restore_app_session);
+Key.on('r', ['ctrl', 'cmd', 'shift'], create_app_session);
+//Key.on('r', window_mgmt_modifier, function() { Phoenix.log(JSON.stringify(create_app_session(App.get('iTerm2')))); } );
+//Key.on('r', window_mgmt_modifier, function() { Phoenix.log(JSON.stringify(get_app_state(App.get('iTerm2').mainWindow()))); } );
+//Key.on('r', window_mgmt_modifier, function() { Phoenix.log(JSON.stringify(create_app_session()))});
