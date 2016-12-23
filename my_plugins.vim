@@ -20,6 +20,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'wellle/tmux-complete.vim' " complete from words in other buffers
         Plug 'Shougo/unite.vim' " unite interface for general lists
 	Plug 'tmux-plugins/vim-tmux-focus-events'
+	Plug 'kmnk/vim-unite-giti' " unite interface for git stuff
 
 call plug#end()
 

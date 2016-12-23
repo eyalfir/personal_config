@@ -87,7 +87,9 @@ nmap <silent> <leader>gb :Gblame<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
 nmap <silent> <leader>gd :Gdiff<CR>
 nmap <silent> <leader>gl :Glog<CR>
-nmap <silent> <leader>gc :Gcommit<CR>
+nmap <silent> <leader>gco :Gcommit<CR>
+nmap <silent> <leader>gcw :Gcommit -m 'wip'<CR>
+nmap <silent> <leader>gcb :Unite giti/branch_recent<CR>
 
 
 function! UpdateTags()
