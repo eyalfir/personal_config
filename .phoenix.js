@@ -107,18 +107,31 @@ function set_main_screen() {
   Phoenix.notify('main screen set')
 }
 
-function focus_to_main_screen() {
-  //var frame = main_screen.main.flippedVisibleFrame();
-  var win = Window.focused()
-  if ( win in in_main_focus ) {
-    win.setFrame(in_main_focus[win])
-    delete in_main_focus[win]
-  } else {
-    in_main_focus[win] = win.frame()
-    var frame = Storage.get('main_screen_frame')
-    Window.focused().setFrame(frame);
+function restore_focused_window() {
+  if ( 'window' in in_main_focus ) {
+    in_main_focus['window'].setFrame(in_main_focus['frame'])
+    delete in_main_focus['window']
+    delete in_main_focus['frame']
   }
 }
+
+function main_screen_focus_window(win) {
+  in_main_focus['window'] = win
+  in_main_focus['frame'] = win.frame()
+  win.setFrame(Storage.get('main_screen_frame'))
+}
+
+function focus_to_main_screen() {
+  //var frame = main_screen.main.flippedVisibleFrame();
+  var current_win = Window.focused()
+  if ( ( 'window' in in_main_focus ) && ( in_main_focus['window'].app().name() == current_win.app().name()) ) {
+	  restore_focused_window()
+	  return
+  }
+  restore_focused_window()
+  main_screen_focus_window(current_win)
+}
+
 Key.on('f', ['ctrl', 'cmd', 'shift'], function() { set_main_screen(); });
 Key.on('f', window_mgmt_modifier, function() { focus_to_main_screen(); });
 
