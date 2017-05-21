@@ -67,6 +67,7 @@ Key.on('c', window_mgmt_modifier, function() { focus('iTerm2'); } )
 Key.on('w', window_mgmt_modifier, function() { focus('ChitChat'); } )
 Key.on('s', window_mgmt_modifier, function() { focus('Slack'); } )
 Key.on('a', window_mgmt_modifier, function() { focus('Calendar'); } )
+Key.on('r', window_mgmt_modifier, function() { focus('Microsoft Outlook'); } )
 
 // **** special automation
 
@@ -166,8 +167,8 @@ function create_app_session() {
 }
 	
 
-Key.on('r', window_mgmt_modifier, restore_app_session);
-Key.on('r', ['ctrl', 'cmd', 'shift'], create_app_session);
+//Key.on('r', window_mgmt_modifier, restore_app_session);
+//Key.on('r', ['ctrl', 'cmd', 'shift'], create_app_session);
 //Key.on('r', window_mgmt_modifier, function() { Phoenix.log(JSON.stringify(create_app_session(App.get('iTerm2')))); } );
 //Key.on('r', window_mgmt_modifier, function() { Phoenix.log(JSON.stringify(get_app_state(App.get('iTerm2').mainWindow()))); } );
 //Key.on('r', window_mgmt_modifier, function() { Phoenix.log(JSON.stringify(create_app_session()))});

@@ -91,6 +91,8 @@ nmap <silent> <leader>gco :Gcommit<CR>
 nmap <silent> <leader>gcw :Gcommit -m 'wip'<CR>
 nmap <silent> <leader>gcb :Unite giti/branch_recent<CR>
 
+autocmd! BufEnter *fugitiveblame nmap K 0yaw:!git log -n1 <C-R>"<CR>
+autocmd! BufLeave *fugitiveblame nunmap K
 
 function! UpdateTags()
   call system('ctags -R')
