@@ -5,7 +5,7 @@ set background=dark
 colorscheme solarized
 
 " a single back directory for all files
-set backupdir=~/work
+set backupdir=~/.vimbackup
 
 set history=100
 
