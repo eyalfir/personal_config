@@ -71,8 +71,8 @@ Key.on('r', window_mgmt_modifier, function() { focus('Microsoft Outlook'); } )
 
 // **** special automation
 
-Key.on('s', ['cmd', 'shift'], function() {Task.run('/Users/eyal/bin/stop_wifi_and_sleep.sh');});
-Key.on('x', ['cmd', 'shift'], function() {Task.run('/Users/eyal/bin/start_wifi.sh');});
+Key.on('s', ['cmd', 'shift'], function() {Task.run('~/bin/stop_wifi_and_sleep.sh');});
+Key.on('x', ['cmd', 'shift'], function() {Task.run('~/bin/start_wifi.sh');});
 Key.on('l', ['cmd', 'shift'], function() {Task.run('/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine');});
 
 
