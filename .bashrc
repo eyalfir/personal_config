@@ -51,21 +51,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
 unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -106,15 +92,16 @@ fi
 export PYTHONSTARTUP=~/.pythonrc
 
 
-
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;36m\]\h\[\033[00m\]\[\033[01;31m\]$(git branch 2>/dev/null|grep -e ^* | tr "*" ":" | tr -d " ")\[\033[00m\]:\[\033[01;33m\]\w\[\033[00m\]> ' 
-alias prod="mysql prod -ulc -plc"
-if [ $(hostname) != Eyals-MacBook-Pro.local ]; then
-  source /opt/intel/composer_xe_2011_sp1.9.293/bin/compilervars.sh intel64
-  source /opt/intel/composer_xe_2011_sp1.9.293/mkl/bin/mklvars.sh intel64
+if [ $HOSTNAME == REMMAC72X7FVH6 ]; then
+  DISPLAY_HOSTNAME=''
 else
-  source /Users/eyal/.bashrc_mac
+  DISPLAY_HOSTNAME='\[\033[00m\]@\[\033[01;36m\]\h\[\033[00m\]'
 fi
+
+
+
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u'$DISPLAY_HOSTNAME'\[\033[01;31m\]$(git branch 2>/dev/null|grep -e ^* | tr "*" ":" | tr -d " ")\[\033[00m\]:\[\033[01;33m\]\w\[\033[00m\]> '
+alias prod="mysql prod -ulc -plc"
 go() {
   rootdir=$(git rev-parse --show-toplevel)
   if [[ ! -z $rootdir ]]; then
