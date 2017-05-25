@@ -131,3 +131,6 @@ alias my_test='path_me py.test'
 alias iwatch='~/personal_config/pythonlib/IPWatch/ipython_with_watch.sh'
 alias prod_ipython='PYTHONPATH=../rabac:../web:.. ipython -ic "from basic_features.all_features import *"'
 alias codev='cd ~/work/lightcyber; path_me vim'
+if [ $(hostname) == REMMAC72X7FVH6 ]; then
+  source ~/bin/.bashrc_mac
+fi
