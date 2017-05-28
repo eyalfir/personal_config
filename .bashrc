@@ -120,8 +120,12 @@ go() {
 stty ixany
 stty ixoff -ixon
 
+# meta-arrows to navigate inline
 bind '"\el": forward-word'
 bind '"\eh": backward-word'
+bind '"\ek": forward-char'
+bind '"\ej": backward-char'
+
 
 export PYTHONPATH=$PYTHONPATH:~/personal_config/pythonlib
 alias vim="vim -X"

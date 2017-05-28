@@ -1,12 +1,13 @@
 call plug#begin('~/.config/nvim/plugged')
 
-	Plug 'tpope/vim-fugitive'
+	Plug 'tpope/vim-fugitive', { 'branch': 'blame_message' }
 	Plug 'easymotion/vim-easymotion'
 	Plug 'ctrlpvim/ctrlp.vim'
 	Plug 'bling/vim-airline'
 	Plug 'majutsushi/tagbar'
 	Plug 'scrooloose/nerdtree'
 	Plug 'christoomey/vim-tmux-navigator'
+	Plug 'tmux-plugins/vim-tmux'
 	Plug 'epeli/slimux'
 	Plug 'tpope/vim-unimpaired'
 	Plug 'altercation/vim-colors-solarized'
