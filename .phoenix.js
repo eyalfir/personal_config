@@ -51,15 +51,21 @@ function rotateMonitors(offset) {
 Key.on('l', ['ctrl', 'cmd', 'shift'], function() {rotateMonitors(1);} );
 Key.on('h', ['ctrl', 'cmd', 'shift'], function() {rotateMonitors(-1);} );
 
+function focusMouse(win) {
+  var frame = win.frame()
+  Mouse.move({x: frame.x + frame.width / 2, y: frame.y + frame.height / 2})
+}
+
 // ***** run specific apps on key
 
 function focus(app_name) {
   var current = App.get(app_name);
   if ( current == undefined ) {
-    App.launch(app_name);
+    current = App.launch(app_name);
   } else {
     current.focus();
   }
+  focusMouse(current.mainWindow())
 }
 
 Key.on('b', window_mgmt_modifier, function() { focus('Google Chrome'); } )
