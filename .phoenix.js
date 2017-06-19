@@ -24,7 +24,6 @@ var window_mgmt_modifier = ['ctrl', 'cmd']
 Key.on('k', window_mgmt_modifier, function() { to_grid(1, 1, 0, 0, 1, 1);});
 Key.on('h', window_mgmt_modifier, function() { to_grid(1, 2, 0, 0, 1, 1);});
 Key.on('l', window_mgmt_modifier, function() { to_grid(1, 2, 0, 1, 1, 1);});
-Key.on('k', window_mgmt_modifier, function() { to_grid(1, 1, 0, 0, 1, 1);});
 Key.on('i', window_mgmt_modifier, function() { to_grid(2, 1, 0, 0, 1, 1);});
 Key.on(',', window_mgmt_modifier, function() { to_grid(2, 1, 1, 0, 1, 1);});
 Key.on('u', window_mgmt_modifier, function() { to_grid(2, 2, 0, 0, 1, 1);});
@@ -61,9 +60,10 @@ function focusMouse(win) {
 function focus(app_name) {
   var current = App.get(app_name);
   if ( current == undefined ) {
+    Phoenix.notify('app ' + app_name + ' not found')
     current = App.launch(app_name);
   } else {
-    current.focus();
+    current.mainWindow().focus();
   }
   focusMouse(current.mainWindow())
 }
@@ -74,6 +74,8 @@ Key.on('w', window_mgmt_modifier, function() { focus('ChitChat'); } )
 Key.on('s', window_mgmt_modifier, function() { focus('Slack'); } )
 Key.on('a', window_mgmt_modifier, function() { focus('Calendar'); } )
 Key.on('r', window_mgmt_modifier, function() { focus('Microsoft Outlook'); } )
+Key.on('v', window_mgmt_modifier, function() { focus('Vysor'); } )
+Key.on('n', window_mgmt_modifier, function() { focus('Desktop-Google-Keep-OSX'); } )
 
 // **** special automation
 
