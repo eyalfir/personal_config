@@ -171,3 +171,10 @@ vnoremap cf :!PYTHONPATH=/Library/Python/2.7/site-packages python /Users/eyal/bi
 vnoremap <leader>ts :w! /tmp/send_to_slack<CR>:terminal python /Users/eyal/bin/interactive_slack.py /tmp/send_to_slack<CR>
 nnoremap <leader>ts :w! /tmp/send_to_slack<CR>:terminal python /Users/eyal/bin/interactive_slack.py /tmp/send_to_slack<CR>
 nnoremap <C-T> "zyy:!set -o errexit; echo <C-r>z \| grep MAGNA-[0-9] \| sed 's/.*\(MAGNA-[0-9]*\).*/\1/' \| xargs -n1 -I@@ open https://lightcyber.atlassian.net/browse/@@<CR>
+
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <M-l> <S-Right>
+cnoremap <M-h> <S-Left>
+cnoremap <M-k> <Right>
+cnoremap <M-j> <Left>
