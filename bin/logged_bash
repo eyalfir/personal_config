@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
 
 ~/personal_config/.tmux/plugins/tmux-logging/scripts/toggle_logging.sh
-bash
+zsh
 ~/personal_config/.tmux/plugins/tmux-logging/scripts/toggle_logging.sh
