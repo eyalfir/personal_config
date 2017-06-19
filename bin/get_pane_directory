@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+
+#echo hi
+entry=$1
+#echo $entry
+grep "$1" /tmp/panes_directories | sed 's/[^:]*://'
