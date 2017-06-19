@@ -6,7 +6,8 @@
 				"args": {
 					"override": {
 						"vicmd": "C",
-						"viins": "I"
+						"viins": "I",
+						"emacs": "E"
 					}
 				}
 			},
@@ -32,16 +33,16 @@
 			{
 				"function": "powerline.segments.shell.jobnum",
 				"priority": 20
+			},
+			{
+				"function": "powerline_gitstatus.gitstatus",
+				"priority": 40
 			}
 		],
 		"right": [
 			{
 				"function": "powerline.segments.shell.last_pipe_status",
 				"priority": 10
-			},
-			{
-				"function": "powerline_gitstatus.gitstatus",
-				"priority": 40
 			}
 		]
 	}
