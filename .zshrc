@@ -1,3 +1,12 @@
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+zplug "plugins/git",   from:oh-my-zsh
+zplug "plugins/pip",   from:oh-my-zsh
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-history-substring-search"
+zplug load
+
 source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 if which nvim > /dev/null 2>&1; then export EDITOR=nvim; else export EDITOR=vim; fi
 
@@ -63,3 +72,12 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "\e[1;5H" beginning-of-line
 bindkey "\e[1;5F" end-of-line
+
+function go_to_personal() {
+	window=$(tmux list-windows -F '#{window_index} #{window_name}' | grep 'personal.yml$' | head -1 | cut -d' ' -f 1)
+	if [[ -n "$window" ]]; then
+	  tmux select-window -t $window
+	else
+	  tmux new-window -n personal.yml nvim ~/work/personal.yml
+	fi
+}
