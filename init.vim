@@ -106,7 +106,8 @@ function! InsertSettrace()
   let br = expand("import pdb; pdb.set_trace()")
   execute "normal o".br
 endfunction
-nmap <Leader>ib :call InsertSettrace()<CR>
+autocmd FileType python noremap <Leader>ib :call InsertSettrace()<CR>
+autocmd FileType yaml noremap <Leader>ib ^lli-<Esc>
 
 " workaround for the terrible neovim issue #2048 https://github.com/neovim/neovim/issues/2048
 nnoremap <C-Q> :TmuxNavigateLeft<CR>
