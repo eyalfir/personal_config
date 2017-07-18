@@ -187,3 +187,6 @@ cnoremap <M-l> <S-Right>
 cnoremap <M-h> <S-Left>
 cnoremap <M-k> <Right>
 cnoremap <M-j> <Left>
+
+autocmd! BufWritePost *personal.yml :echo system("cp ~/work/personal.yml /tmp/personal.yml.$(date +%Y%m%dT%H%M%S).backup && trello_sync update 2>&1 | tee -a /tmp/sync.log && trello_sync fetch > ~/work/personal.yml")
+autocmd! FileReadPre *personal.yml !trello_sync fetch > ~/work/personal.yml
