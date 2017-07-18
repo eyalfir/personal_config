@@ -73,6 +73,8 @@ bindkey "^[[4~" end-of-line
 bindkey "\e[1;5H" beginning-of-line
 bindkey "\e[1;5F" end-of-line
 
+bindkey -s "^[^E" '^A#^M'
+
 function go_to_personal() {
 	window=$(tmux list-windows -F '#{window_index} #{window_name}' | grep 'personal.yml$' | head -1 | cut -d' ' -f 1)
 	if [[ -n "$window" ]]; then
@@ -81,3 +83,8 @@ function go_to_personal() {
 	  tmux new-window -n personal.yml nvim ~/work/personal.yml
 	fi
 }
+bindkey '^P' history-substring-search-up   
+bindkey '^N' history-substring-search-down
+export HISTORY_SUBSTRING_SEARCH_FUZZY=1
+
+setopt INTERACTIVE_COMMENTS
