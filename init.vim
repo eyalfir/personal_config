@@ -108,6 +108,7 @@ function! InsertSettrace()
 endfunction
 autocmd FileType python noremap <Leader>ib :call InsertSettrace()<CR>
 autocmd FileType yaml noremap <Leader>ib ^lli-<Esc>
+autocmd FileType dot nnoremap M :GraphvizCompile<CR>:GraphvizShow<CR>
 
 " workaround for the terrible neovim issue #2048 https://github.com/neovim/neovim/issues/2048
 nnoremap <C-Q> :TmuxNavigateLeft<CR>
