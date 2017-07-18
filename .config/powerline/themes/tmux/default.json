@@ -2,7 +2,7 @@
 	"segments": {
 		"right": [
 			{
-				"function": "get_next_meeting.get_next_meeting"
+				"function": "get_next_meeting.get_next_meeting.get_next_meeting"
 			},
 			{
 				"function": "powerline.segments.common.time.date",
