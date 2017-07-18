@@ -174,6 +174,13 @@ vnoremap <leader>ts :w! /tmp/send_to_slack<CR>:terminal python /Users/eyal/bin/i
 nnoremap <leader>ts :w! /tmp/send_to_slack<CR>:terminal python /Users/eyal/bin/interactive_slack.py /tmp/send_to_slack<CR>
 nnoremap <C-T> "zyy:!set -o errexit; echo <C-r>z \| grep MAGNA-[0-9] \| sed 's/.*\(MAGNA-[0-9]*\).*/\1/' \| xargs -n1 -I@@ open https://lightcyber.atlassian.net/browse/@@<CR>
 
+function! CdToCurrent()
+	let current_directory=system('dirname ' . expand('%:p'))
+	call SlimuxSendCode("cd " . current_directory)
+endfunction
+
+nnoremap <leader>cd :call CdToCurrent()<CR>
+
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <M-l> <S-Right>
