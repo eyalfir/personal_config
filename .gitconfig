@@ -10,6 +10,7 @@
 	co = checkout
 	st = status
 	br = branch
+	psh = !git push && jenkins build
 [http]
 [core]
 	editor = vim
