@@ -129,12 +129,6 @@ bind '"\ej": backward-char'
 
 export PYTHONPATH=$PYTHONPATH:~/personal_config/pythonlib
 alias vim="vim -X"
-alias git_pnp='git pull --rebase && ./run_tests.sh && git push'
-alias path_me='PYTHONPATH=tools/scripts/ad:tools/zorba:tools:research:tools/mogo:tools/common:tools/scripts:web/rabac:utils/groundhog/lib'
-alias my_test='path_me py.test'
-alias iwatch='~/personal_config/pythonlib/IPWatch/ipython_with_watch.sh'
-alias prod_ipython='PYTHONPATH=../rabac:../web:.. ipython -ic "from basic_features.all_features import *"'
-alias codev='cd ~/work/lightcyber; path_me vim'
 if [ $(hostname) == REMMAC72X7FVH6 ]; then
   source ~/bin/.bashrc_mac
 fi
