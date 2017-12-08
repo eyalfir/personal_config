@@ -97,3 +97,6 @@ fi
 
 setopt INTERACTIVE_COMMENTS
 set -o allexport
+
+WORDCHARS='*?_-=&!#$%^(){}<>'
+alias internet='curl --connect-timeout 5 www.google.com > /dev/null 2>&1 && echo "Intenet is up" || echo "Internet is down"'
