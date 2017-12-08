@@ -12,6 +12,7 @@
 	st = status
 	br = branch
 	psh = !git push && jenkins build
+	wip = !git commit -am \"wip\" && git psh
 [http]
 [core]
 	editor = vim
