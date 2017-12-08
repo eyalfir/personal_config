@@ -1,6 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
 
 	Plug 'tpope/vim-fugitive', { 'branch': 'blame_message' }
+	Plug 'aklt/plantuml-syntax'
 	Plug 'wannesm/wmgraphviz.vim'
 	Plug 'easymotion/vim-easymotion'
 	Plug 'ctrlpvim/ctrlp.vim'

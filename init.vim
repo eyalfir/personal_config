@@ -147,8 +147,13 @@ nmap <silent> cog :GitGutterToggle<CR>
 highlight clear SignColumn
 
 autocmd! BufWritePost * Neomake
+highlight NeomakeErrorSign ctermfg=red |
+highlight NeomakeWarningSign ctermfg=yellow
+highlight NeomakeWarning ctermfg=yellow
 
 nnoremap <silent> <leader>m :MundoToggle<CR>
+
+let g:neomake_python_enabled_makers = ['python', 'pylint']
 
 nnoremap <leader><leader>r :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader><leader>e :e ~/.config/nvim/init.vim<CR>
@@ -173,6 +178,13 @@ vnoremap cf :!PYTHONPATH=/Library/Python/2.7/site-packages python /Users/eyal/bi
 vnoremap <leader>ts :w! /tmp/send_to_slack<CR>:terminal python /Users/eyal/bin/interactive_slack.py /tmp/send_to_slack<CR>
 nnoremap <leader>ts :w! /tmp/send_to_slack<CR>:terminal python /Users/eyal/bin/interactive_slack.py /tmp/send_to_slack<CR>
 nnoremap <C-T> "zyy:!set -o errexit; echo <C-r>z \| grep MAGNA-[0-9] \| sed 's/.*\(MAGNA-[0-9]*\).*/\1/' \| xargs -n1 -I@@ open https://lightcyber.atlassian.net/browse/@@<CR>
+
+" SudoWrite
+function! SudoWrite()
+	let undofile = fnameescape(substitute(expand("%:p"), "/", "%", "g"))
+	exec "wundo" . &undodir . "/" . undofile
+	execute ":write !sudo dd of=" . shellescape(@%, 1)
+endfunction
 
 function! CdToCurrent()
 	let current_directory=system('dirname ' . expand('%:p'))
