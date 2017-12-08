@@ -1,0 +1,25 @@
+#! /bin/bash
+
+data=($(tmux list-panes -F '#{pane_active} #{pane_id} #{pane_pid}' | grep '^1'))
+echo ${data[@]}
+
+if [ -z "${data}" ]; then
+  tmux display-message "nothing to reconnect"
+  exit
+fi
+
+pane_id=${data[1]}
+echo id ${pane_id}
+pane_pid=${data[2]}
+echo pid ${pane_pid}
+subpid_raw=$(ps -e -o'ppid, pid, command' | grep "^ *${pane_pid}" | grep sns)
+subpid=$(echo ${subpid_raw} | awk '{print $2}')
+cmd_to_run=$(ps -p $subpid -o'command' | grep sns)
+echo subpid_raw "${subpid_raw}"
+
+if [ -z "${cmd_to_run}" ]; then
+  tmux display-message "command not sns"
+  exit
+fi
+kill $subpid
+tmux send-keys -t "${pane_id}" "${cmd_to_run}"
