@@ -1,0 +1,10 @@
+title SYNCING_$1
+
+cmd="rsync_git_once.sh"
+$cmd $1 $2;
+RES=0
+while (( $RES == 0 ))
+do
+  fswatch -o -r --exclude '/.git/' $1 | xargs -n1 -I {} $cmd $1 $2
+  RES=$?
+done
