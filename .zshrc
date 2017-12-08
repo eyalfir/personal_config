@@ -73,6 +73,9 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "\e[1;5H" beginning-of-line
 bindkey "\e[1;5F" end-of-line
+bindkey "\eu" beginning-of-line
+bindkey "\eo" end-of-line
+bindkey "\ex" delete-char
 
 bindkey -s "^[^E" '^A#^M'
 
@@ -88,4 +91,9 @@ bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 export HISTORY_SUBSTRING_SEARCH_FUZZY=1
 
+if [[ $(hostname) == "TLVMAC72X7FVH6" ]]; then
+  source ~/bin/.bashrc_mac
+fi
+
 setopt INTERACTIVE_COMMENTS
+set -o allexport
