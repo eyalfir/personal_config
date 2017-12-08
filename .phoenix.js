@@ -68,13 +68,36 @@ function focus(app_name) {
   focusMouse(current.mainWindow())
 }
 
+function focus_airdroid() {
+  var app = App.get('AirDroid');
+  if ( app == undefined ) {
+    app = App.launch('AirDroid');
+  } else {
+
+    var windows = app.windows()
+    var found = false
+    //fullscreen = app.Windows().filter(function(w)
+    //app.windows().forEach(function (win) { Phoenix.notify(win.title())})
+    for (i = 0; i < app.windows().length; i++) {
+	    //Phoenix.notify('- ' + app.windows()[i].title() + ' - ' + i)
+	    if ( app.windows()[i].title() == '' ) {
+		    app.windows()[i].focus()
+		    found = true
+	    }
+    }
+    if ( ! found ) {
+	    app.windows()[0].focus()
+    }
+  }
+}
+
 Key.on('b', window_mgmt_modifier, function() { focus('Google Chrome'); } )
 Key.on('c', window_mgmt_modifier, function() { focus('iTerm2'); } )
 Key.on('w', window_mgmt_modifier, function() { focus('ChitChat'); } )
 Key.on('s', window_mgmt_modifier, function() { focus('Slack'); } )
 Key.on('a', window_mgmt_modifier, function() { focus('Calendar'); } )
 Key.on('r', window_mgmt_modifier, function() { focus('Microsoft Outlook'); } )
-Key.on('v', window_mgmt_modifier, function() { focus('Vysor'); } )
+Key.on('v', window_mgmt_modifier, focus_airdroid)
 Key.on('n', window_mgmt_modifier, function() { focus('Desktop-Google-Keep-OSX'); } )
 
 // **** special automation
@@ -82,6 +105,7 @@ Key.on('n', window_mgmt_modifier, function() { focus('Desktop-Google-Keep-OSX');
 Key.on('s', ['cmd', 'shift'], function() {Task.run('~/bin/stop_wifi_and_sleep.sh');});
 Key.on('x', ['cmd', 'shift'], function() {Task.run('~/bin/start_wifi.sh');});
 Key.on('l', ['cmd', 'shift'], function() {Task.run('/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine');});
+Key.on('c', ['cmd', 'shift'], function() {Task.run('~/personal_config/bin/close_all_notifications.sh');});
 
 
 // ***** save and restore full window session
@@ -176,7 +200,7 @@ function create_app_session() {
 	
 
 //Key.on('r', window_mgmt_modifier, restore_app_session);
-//Key.on('r', ['ctrl', 'cmd', 'shift'], create_app_session);
+Key.on('r', ['ctrl', 'cmd', 'shift'], create_app_session);
 //Key.on('r', window_mgmt_modifier, function() { Phoenix.log(JSON.stringify(create_app_session(App.get('iTerm2')))); } );
 //Key.on('r', window_mgmt_modifier, function() { Phoenix.log(JSON.stringify(get_app_state(App.get('iTerm2').mainWindow()))); } );
 //Key.on('r', window_mgmt_modifier, function() { Phoenix.log(JSON.stringify(create_app_session()))});
