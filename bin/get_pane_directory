@@ -2,5 +2,8 @@
 
 #echo hi
 entry=$1
+if [ -z "${entry}" ]; then
+  entry=$(tmux list-panes -F '#{pane_active};#{pid};#{pane_pid}' | grep '^1' | cut -d';' -f 2-)
+fi
 #echo $entry
-grep "$1" /tmp/panes_directories | sed 's/[^:]*://'
+grep "${entry}" /tmp/panes_directories | sed 's/[^:]*://'
