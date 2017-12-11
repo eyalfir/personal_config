@@ -68,6 +68,29 @@ function focus(app_name) {
   focusMouse(current.mainWindow())
 }
 
+function focus_window(app_name, window_title) {
+  var app = App.get(app_name);
+  if ( app == undefined ) {
+    Phoenix.notify('app ' + app_name + ' not found')
+    return
+  } else {
+    var windows = app.windows()
+    var found = false
+    //Phoenix.notify('app ' + app_name + ' found')
+    for (i = 0; i < app.windows().length; i++) {
+      //Phoenix.notify('- ' + app.windows()[i].title() + ' - ' + i)
+      if ( app.windows()[i].title().match(window_title) ) {
+        app.windows()[i].focus()
+        found = true
+      }
+    }
+    if ( ! found ) {
+      app.windows()[0].focus()
+    }
+  }
+}
+
+
 function focus_airdroid() {
   var app = App.get('AirDroid');
   if ( app == undefined ) {
@@ -95,8 +118,8 @@ Key.on('b', window_mgmt_modifier, function() { focus('Google Chrome'); } )
 Key.on('c', window_mgmt_modifier, function() { focus('iTerm2'); } )
 Key.on('w', window_mgmt_modifier, function() { focus('ChitChat'); } )
 Key.on('s', window_mgmt_modifier, function() { focus('Slack'); } )
-Key.on('a', window_mgmt_modifier, function() { focus('Calendar'); } )
-Key.on('r', window_mgmt_modifier, function() { focus('Microsoft Outlook'); } )
+Key.on('a', window_mgmt_modifier, function() { focus_window('Microsoft Outlook', 'Calendar'); } )
+Key.on('r', window_mgmt_modifier, function() { focus_window('Microsoft Outlook', 'Inbox'); } )
 Key.on('v', window_mgmt_modifier, focus_airdroid)
 Key.on('n', window_mgmt_modifier, function() { focus('Desktop-Google-Keep-OSX'); } )
 
