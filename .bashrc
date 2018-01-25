@@ -101,6 +101,7 @@ fi
 
 
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u'$DISPLAY_HOSTNAME'\[\033[01;31m\]$(git branch 2>/dev/null|grep -e ^* | tr "*" ":" | tr -d " ")\[\033[00m\]:\[\033[01;33m\]\w\[\033[00m\]> '
+PROMPT='%F{red}%n%F{yellow}@%F{green}%m%F{cyan}$(pwd)%F{grey}> ' #\[\033[01;31m\]$(git branch 2>/dev/null|grep -e ^* | tr "*" ":" | tr -d " ")\[\033[00m\]:\[\033[01;33m\]\w\[\033[00m\]> '
 alias prod="mysql prod -ulc -plc"
 go() {
   rootdir=$(git rev-parse --show-toplevel)
