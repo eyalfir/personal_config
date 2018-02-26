@@ -6,6 +6,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'easymotion/vim-easymotion'
 	Plug 'ctrlpvim/ctrlp.vim'
 	Plug 'bling/vim-airline'
+	Plug 'posva/vim-vue'
 	Plug 'majutsushi/tagbar'
 	Plug 'scrooloose/nerdtree'
 	Plug 'christoomey/vim-tmux-navigator'

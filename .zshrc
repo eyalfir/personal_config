@@ -15,6 +15,7 @@ if which nvim > /dev/null 2>&1; then export EDITOR=nvim; else export EDITOR=vim;
 alias ls='ls -G'
 alias ll='ls -alF'
 alias vim='nvim'
+alias dc='docker-compose'
 
 export PYTHONSTARTUP=~/.pythonrc
 

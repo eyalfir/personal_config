@@ -177,7 +177,8 @@ vnoremap cf :!PYTHONPATH=/Library/Python/2.7/site-packages python /Users/eyal/bi
 " slack visual selection with \ts
 vnoremap <leader>ts :w! /tmp/send_to_slack<CR>:terminal python /Users/eyal/bin/interactive_slack.py /tmp/send_to_slack<CR>
 nnoremap <leader>ts :w! /tmp/send_to_slack<CR>:terminal python /Users/eyal/bin/interactive_slack.py /tmp/send_to_slack<CR>
-nnoremap <C-T> "zyy:!set -o errexit; echo <C-r>z \| grep MAGNA-[0-9] \| sed 's/.*\(MAGNA-[0-9]*\).*/\1/' \| xargs -n1 -I@@ open https://lightcyber.atlassian.net/browse/@@<CR>
+nnoremap <C-T> "zyy:!set -o errexit; echo <C-r>z \| egrep 'MAGNA-[0-9]*' \| sed 's/.*\(MAGNA-[0-9]*\).*/\1/' \| xargs -n1 -I@@ open https://lightcyber.atlassian.net/browse/@@<CR>
+
 
 " SudoWrite
 function! SudoWrite()
@@ -202,3 +203,5 @@ cnoremap <M-j> <Left>
 
 autocmd! BufWritePost *personal.yml :echo system("cp ~/work/personal.yml /tmp/personal.yml.$(date +%Y%m%dT%H%M%S).backup && trello_sync update 2>&1 | tee -a /tmp/sync.log && trello_sync fetch > ~/work/personal.yml")
 autocmd! FileReadPre *personal.yml !trello_sync fetch > ~/work/personal.yml
+autocmd! FileType vue setlocal expandtab tabstop=2 shiftwidth=2
+autocmd! FileType js setlocal expandtab tabstop=2 shiftwidth=2
