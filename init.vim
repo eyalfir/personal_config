@@ -204,4 +204,4 @@ cnoremap <M-j> <Left>
 autocmd! BufWritePost *personal.yml :echo system("cp ~/work/personal.yml /tmp/personal.yml.$(date +%Y%m%dT%H%M%S).backup && trello_sync update 2>&1 | tee -a /tmp/sync.log && trello_sync fetch > ~/work/personal.yml")
 autocmd! FileReadPre *personal.yml !trello_sync fetch > ~/work/personal.yml
 autocmd! FileType vue setlocal expandtab tabstop=2 shiftwidth=2
-autocmd! FileType js setlocal expandtab tabstop=2 shiftwidth=2
+autocmd! FileType javascript setlocal expandtab tabstop=2 shiftwidth=2
