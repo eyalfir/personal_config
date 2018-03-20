@@ -1,3 +1,6 @@
-[submodule "tmux_plugins/tmux-open"]
-	path = tmux_plugins/tmux-open
-	url = git@github.com:tmux-plugins/tmux-open.git
+[submodule ".tmux/plugins/tmux-fingers"]
+	path = .tmux/plugins/tmux-fingers
+	url = git@github.com:eyalfir/tmux-fingers.git
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
+	url = http://github.com/tmux-plugins/tpm

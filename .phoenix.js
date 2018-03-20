@@ -64,8 +64,8 @@ function focus(app_name) {
     current = App.launch(app_name);
   } else {
     current.mainWindow().focus();
+    focusMouse(current.mainWindow())
   }
-  focusMouse(current.mainWindow())
 }
 
 function focus_window(app_name, window_perdicate) {
@@ -73,21 +73,13 @@ function focus_window(app_name, window_perdicate) {
   if ( app == undefined ) {
     Phoenix.notify('app ' + app_name + ' not found')
     return
+  }
+  var windows = app.windows()
+  var filtered = app.windows().filter(window_perdicate)
+  if (filtered.length > 0) {
+    filtered[0].focus()
   } else {
-    var windows = app.windows()
-    var found = false
-    //Phoenix.notify('app ' + app_name + ' found')
-    for (i = 0; i < app.windows().length; i++) {
-      //Phoenix.notify('- ' + app.windows()[i].title() + ' - ' + i)
-      //if ( app.windows()[i].title().match(window_title) ) {
-      if ( window_perdicate(app.windows()[i]) ) {
-        app.windows()[i].focus()
-        found = true
-      }
-    }
-    if ( ! found ) {
-      app.windows()[0].focus()
-    }
+    app.windows()[0].focus()
   }
 }
 
@@ -121,8 +113,6 @@ Key.on('z', window_mgmt_modifier, function() { focus_window('zoom.us', function(
 Key.on('c', window_mgmt_modifier, function() { focus('iTerm2'); } )
 Key.on('w', window_mgmt_modifier, function() { focus('WhatsApp'); } )
 Key.on('s', window_mgmt_modifier, function() { focus('Slack'); } )
-//Key.on('a', window_mgmt_modifier, function() { focus_window('Microsoft Outlook', 'Calendar'); } )
-//Key.on('r', window_mgmt_modifier, function() { focus_window('Microsoft Outlook', function(win) { win.title().match('Inbox')}); } )
 Key.on('a', window_mgmt_modifier, function() { focus_window('Microsoft Outlook', function(win) { return win.title().match('Calendar')}); } )
 Key.on('r', window_mgmt_modifier, function() { focus_window('Microsoft Outlook', function(win) { return ! win.title().match('Calendar')}); } )
 Key.on('v', window_mgmt_modifier, focus_airdroid)
@@ -133,7 +123,6 @@ Key.on('n', window_mgmt_modifier, function() { focus('Desktop-Google-Keep-OSX');
 Key.on('s', ['cmd', 'shift'], function() {Task.run('~/bin/stop_wifi_and_sleep.sh');});
 Key.on('x', ['cmd', 'shift'], function() {Task.run('~/bin/start_wifi.sh');});
 Key.on('l', ['cmd', 'shift'], function() {Task.run('/System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine');});
-/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine
 Key.on('c', ['cmd', 'shift'], function() {Task.run('~/personal_config/bin/close_all_notifications.sh');});
 
 
