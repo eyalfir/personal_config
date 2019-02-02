@@ -13,6 +13,7 @@
 	br = branch
 	psh = !git push && jenkins build
 	wip = !git commit -am \"wip\" && git psh
+	rmbr = !git push origin :heads/${1} && git branch -D ${1}
 [http]
 [core]
 	editor = vim
