@@ -109,3 +109,14 @@ alias internet='curl --connect-timeout 5 www.google.com > /dev/null 2>&1 && echo
 
 alias tunnel_to='ssh -X -L 0.0.0.0:3333:localhost:443 -L 0.0.0.0:2222:localhost:80 -o ExitOnForwardFailure=yes $1'
 alias master_tunnel='sudo ncat -k -l 0.0.0.0 443 -c "ncat 127.0.0.1 3333"'
+alias fb='firebase'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/efirstenberg/work/gcloud/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/efirstenberg/work/gcloud/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/efirstenberg/work/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/efirstenberg/work/gcloud/google-cloud-sdk/completion.zsh.inc'; fi
+
+function notify() {
+  osascript -e 'tell Application "Finder" to display dialog "Job finished" '
+}
