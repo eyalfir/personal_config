@@ -46,8 +46,12 @@ bindkey -s '^[7' '^A^[f^[f^[f^[f^[f^[f'
 bindkey -s '^[8' '^A^[f^[f^[f^[f^[f^[f^[f'
 bindkey -s '^[9' '^A^[f^[f^[f^[f^[f^[f^[f^[f'
 
-source /usr/local/Cellar/fzf/0.16.7/shell/completion.zsh
-source /usr/local/Cellar/fzf/0.16.7/shell/key-bindings.zsh
+source /usr/local/Cellar/fzf/0.17.3/shell/completion.zsh
+source /usr/local/Cellar/fzf/0.17.3/shell/key-bindings.zsh
+
+function internal_ip() {
+	ifconfig | grep 'inet 10' | sed 's/^.*\(10\.[^ ]*\).*$/\1/' | head -1
+}
 function cd() {
 	entry_key=$(tmux list-panes -F '#{pid};#{pane_pid};#{pane_active}' | grep '1$' | sed 's/;1$//')
 	[[ -f /tmp/panes_directories ]] && sed -i.bak "/$entry_key/d" /tmp/panes_directories
