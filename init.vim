@@ -65,14 +65,19 @@ vmap <Leader>s :SlimuxPasteSelection<CR>
 
 "cursor line hightlight
 highlight CursorLine ctermbg=234 cterm=None term=None
+highlight CursorColumn ctermbg=234 cterm=None term=None
 au BufEnter * set cursorline
+au BufEnter *.js,*.vue set cursorcolumn
 au BufLeave * set nocursorline
+au BufLeave * set nocursorcolumn
 set nocursorline
 
 " ctrlP customization
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_extensions = ["tag"]
-let g:ctrlp_custom_ignore = '\v\.(git|pyc|pcap|expected|ps1|no_file)$'
+"let g:ctrlp_custom_ignore = '\v\.(git|pyc|pcap|expected|ps1|no_file)$'
+"let g:ctrlp_custom_ignore = 'node_modules\|\.git'
+let g:ctrlp_custom_ignore = 'node_modules/\|\.git/'
 
 silent! unmap <C-P>
 nmap <C-P><C-P> :<C-U>CtrlP<CR>
@@ -170,9 +175,6 @@ nnoremap <silent> cs :UltiSnipsEdit<CR>
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<a-n>"
 let g:UltiSnipsJumpBackwardTrigger="<a-p>"
-
-" specific for features
-vnoremap cf :!PYTHONPATH=/Library/Python/2.7/site-packages python /Users/eyal/bin/canonalize_dataframe_decorator.py<CR>
 
 " slack visual selection with \ts
 vnoremap <leader>ts :w! /tmp/send_to_slack<CR>:terminal python /Users/eyal/bin/interactive_slack.py /tmp/send_to_slack<CR>
