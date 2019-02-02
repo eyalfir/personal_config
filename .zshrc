@@ -96,7 +96,7 @@ bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 export HISTORY_SUBSTRING_SEARCH_FUZZY=1
 
-if [[ $(hostname) == "TLVMAC72X7FVH6" ]]; then
+if [[ $(hostname) == "TLVMACQ2DNHV2Q" ]]; then
   source ~/bin/.bashrc_mac
 fi
 
