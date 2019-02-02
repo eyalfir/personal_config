@@ -108,15 +108,17 @@ function focus_airdroid() {
 }
 
 Key.on('b', window_mgmt_modifier, function() { focus('Google Chrome'); } )
-Key.on('f', window_mgmt_modifier, function() { focus('Firefox'); } )
+Key.on('f', window_mgmt_modifier, function() { focus('Finder'); } )
 Key.on('z', window_mgmt_modifier, function() { focus_window('zoom.us', function(win) { return win.title().match('Zoom Meeting ID') } ) } );
 Key.on('c', window_mgmt_modifier, function() { focus('iTerm2'); } )
+Key.on('t', window_mgmt_modifier, function() { focus('Trello'); } )
 Key.on('w', window_mgmt_modifier, function() { focus('WhatsApp'); } )
 Key.on('s', window_mgmt_modifier, function() { focus('Slack'); } )
 Key.on('a', window_mgmt_modifier, function() { focus_window('Microsoft Outlook', function(win) { return win.title().match('Calendar')}); } )
 Key.on('r', window_mgmt_modifier, function() { focus_window('Microsoft Outlook', function(win) { return ! win.title().match('Calendar')}); } )
 Key.on('v', window_mgmt_modifier, focus_airdroid)
-Key.on('n', window_mgmt_modifier, function() { focus('Desktop-Google-Keep-OSX'); } )
+// Key.on('n', window_mgmt_modifier, function() { focus('Desktop-Google-Keep-OSX'); } )
+Key.on('n', window_mgmt_modifier, function() { focus('Google Keep'); } )
 
 // **** special automation
 
