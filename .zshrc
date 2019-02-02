@@ -103,7 +103,8 @@ fi
 setopt INTERACTIVE_COMMENTS
 set -o allexport
 
-WORDCHARS='*?_-=&!#$%^(){}<>'
+#WORDCHARS='*?_-=&!#$%^(){}<>'
+WORDCHARS='_'
 alias internet='curl --connect-timeout 5 www.google.com > /dev/null 2>&1 && echo "Intenet is up" || echo "Internet is down"'
 
 alias tunnel_to='ssh -X -L 0.0.0.0:3333:localhost:443 -L 0.0.0.0:2222:localhost:80 -o ExitOnForwardFailure=yes $1'
