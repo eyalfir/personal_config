@@ -207,3 +207,6 @@ autocmd! BufWritePost *personal.yml :echo system("cp ~/work/personal.yml /tmp/pe
 autocmd! FileReadPre *personal.yml !trello_sync fetch > ~/work/personal.yml
 autocmd! FileType vue setlocal expandtab tabstop=2 shiftwidth=2
 autocmd! FileType javascript setlocal expandtab tabstop=2 shiftwidth=2
+nmap <C-f> :Ggrep '
+set updatetime=100
+command Lightcyber e ~/work/lightcyber/Jenkinsfile
