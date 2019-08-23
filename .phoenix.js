@@ -50,80 +50,56 @@ function rotateMonitors(offset) {
 Key.on('l', ['ctrl', 'cmd', 'shift'], function() {rotateMonitors(1);} );
 Key.on('h', ['ctrl', 'cmd', 'shift'], function() {rotateMonitors(-1);} );
 
+// ***** run specific apps on key
+
 function focusMouse(win) {
   var frame = win.frame()
   Mouse.move({x: frame.x + frame.width / 2, y: frame.y + frame.height / 2})
 }
 
-// ***** run specific apps on key
-
-function focus(app_name) {
-  var current = App.get(app_name);
-  if ( current == undefined ) {
-    Phoenix.notify('app ' + app_name + ' not found')
-    current = App.launch(app_name);
-  } else {
-    current.mainWindow().focus();
-    focusMouse(current.mainWindow())
-  }
-}
-
-function focus_window(app_name, window_perdicate) {
+function focus_window(app_name, window_perdicate, toLaunch) {
+  var appToLaunch = toLaunch || app_name
+  var winPredicate = window_perdicate || ( win => win.title().match(app_name) )
   var app = App.get(app_name);
   if ( app == undefined ) {
-    Phoenix.notify('app ' + app_name + ' not found')
+    if (App.launch(appToLaunch)) {
+      Phoenix.notify('launching ' + app_name)
+    } else {
+      Phoenix.notify('app ' + app_name + ' not found')
+    }
     return
-  }
-  var windows = app.windows()
-  var filtered = app.windows().filter(window_perdicate)
-  if (filtered.length > 0) {
-    filtered[0].focus()
   } else {
-    app.windows()[0].focus()
+    //Phoenix.notify('found app');
+    //Phoenix.notify(app.windows.length);
   }
+  var filtered = app.windows().filter(winPredicate)
+  var win = filtered.length > 0 ? filtered[0] : app.windows()[0]
+  win.focus()
+  focusMouse(win)
+}
+
+function focusOnGmail() {
+  Task.run('~/personal_config/bin/goto_inbox.sh')
+  focus_window('Google Chrome')
 }
 
 
-function focus_airdroid() {
-  var app = App.get('AirDroid');
-  if ( app == undefined ) {
-    app = App.launch('AirDroid');
-  } else {
 
-    var windows = app.windows()
-    var found = false
-    //fullscreen = app.Windows().filter(function(w)
-    //app.windows().forEach(function (win) { Phoenix.notify(win.title())})
-    for (i = 0; i < app.windows().length; i++) {
-	    //Phoenix.notify('- ' + app.windows()[i].title() + ' - ' + i)
-	    if ( app.windows()[i].title() == '' ) {
-		    app.windows()[i].focus()
-		    found = true
-	    }
-    }
-    if ( ! found ) {
-	    app.windows()[0].focus()
-    }
-  }
-}
-
-Key.on('b', window_mgmt_modifier, function() { focus('Google Chrome'); } )
-Key.on('f', window_mgmt_modifier, function() { focus('Finder'); } )
+Key.on('b', window_mgmt_modifier, function() { focus_window('Google Chrome', function(win) { return win.title().match('Chrome'); } ) } )
+Key.on('f', window_mgmt_modifier, function() { focus_window('Finder'); } )
 Key.on('z', window_mgmt_modifier, function() { focus_window('zoom.us', function(win) { return win.title().match('Zoom Meeting ID') } ) } );
-Key.on('c', window_mgmt_modifier, function() { focus('iTerm2'); } )
-Key.on('t', window_mgmt_modifier, function() { focus('Trello'); } )
-Key.on('w', window_mgmt_modifier, function() { focus('WhatsApp'); } )
-Key.on('s', window_mgmt_modifier, function() { focus('Slack'); } )
-Key.on('a', window_mgmt_modifier, function() { focus_window('Microsoft Outlook', function(win) { return win.title().match('Calendar')}); } )
-Key.on('r', window_mgmt_modifier, function() { focus_window('Microsoft Outlook', function(win) { return ! win.title().match('Calendar')}); } )
-Key.on('v', window_mgmt_modifier, focus_airdroid)
+Key.on('c', window_mgmt_modifier, function() { focus_window('iTerm2', null, 'iterm') } )
+Key.on('t', window_mgmt_modifier, function() { focus_window('Trello'); } )
+Key.on('w', window_mgmt_modifier, function() { focus_window('WhatsApp'); } )
+Key.on('g', window_mgmt_modifier, focusOnGmail)
+Key.on('s', window_mgmt_modifier, function() { focus_window('Slack'); } )
+Key.on('a', window_mgmt_modifier, function() { focus_window('Google Chrome', function(win) { return win.title().match('GCalendar'); } ) } )
 // Key.on('n', window_mgmt_modifier, function() { focus('Desktop-Google-Keep-OSX'); } )
-Key.on('n', window_mgmt_modifier, function() { focus('Google Keep'); } )
+Key.on('n', window_mgmt_modifier, function() { focus_window('Google Keep'); } )
 
 // **** special automation
 
 Key.on('s', ['cmd', 'shift'], function() {Task.run('~/bin/stop_wifi_and_sleep.sh');});
-Key.on('x', ['cmd', 'shift'], function() {Task.run('~/bin/start_wifi.sh');});
 Key.on('l', ['cmd', 'shift'], function() {Task.run('/System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine');});
 Key.on('c', ['cmd', 'shift'], function() {Task.run('~/personal_config/bin/close_all_notifications.sh');});
 
@@ -148,45 +124,6 @@ function restore_last_session() {
 
 Key.on('9', ['ctrl', 'cmd', 'shift'], function() { store_last_session(); });
 Key.on('9', window_mgmt_modifier, function() {restore_last_session(); });
-
-// ***** bring a specific window to focus on main screen
-
-var main_screen = { main: undefined };
-var in_main_focus = {}
-
-function set_main_screen() {
-  //main_screen.main = Window.focused().screen()
-  Storage.set('main_screen_frame', Window.focused().screen().flippedVisibleFrame())
-  Phoenix.notify('main screen set')
-}
-
-function restore_focused_window() {
-  if ( 'window' in in_main_focus ) {
-    in_main_focus['window'].setFrame(in_main_focus['frame'])
-    delete in_main_focus['window']
-    delete in_main_focus['frame']
-  }
-}
-
-function main_screen_focus_window(win) {
-  in_main_focus['window'] = win
-  in_main_focus['frame'] = win.frame()
-  win.setFrame(Storage.get('main_screen_frame'))
-}
-
-function focus_to_main_screen() {
-  //var frame = main_screen.main.flippedVisibleFrame();
-  var current_win = Window.focused()
-  if ( ( 'window' in in_main_focus ) && ( in_main_focus['window'].app().name() == current_win.app().name()) ) {
-	  restore_focused_window()
-	  return
-  }
-  restore_focused_window()
-  main_screen_focus_window(current_win)
-}
-
-//Key.on('f', ['ctrl', 'cmd', 'shift'], function() { set_main_screen(); });
-//Key.on('f', window_mgmt_modifier, function() { focus_to_main_screen(); });
 
 // ******* store session with app names and exact frames
 
