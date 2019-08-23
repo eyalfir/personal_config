@@ -15,7 +15,6 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'tpope/vim-unimpaired'
 	Plug 'altercation/vim-colors-solarized'
 	Plug 'sophacles/vim-bundle-mako'
-	Plug 'SirVer/ultisnips'
 	Plug 'airblade/vim-gitgutter'
 	Plug 'jeetsukumaran/vim-buffergator'
 	Plug 'simnalamburt/vim-mundo' " unlimited undo tree, like Gundo but with live depelopment community

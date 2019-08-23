@@ -6,8 +6,11 @@ zplug "plugins/pip",   from:oh-my-zsh
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-history-substring-search"
+#zplug "avivl/gcloud-project", use:init.sh
 zplug load
 
+PATH=/usr/local/bin:$PATH:~/bin:~/personal_config/bin
 source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 if which nvim > /dev/null 2>&1; then export EDITOR=nvim; else export EDITOR=vim; fi
 
@@ -46,8 +49,8 @@ bindkey -s '^[7' '^A^[f^[f^[f^[f^[f^[f'
 bindkey -s '^[8' '^A^[f^[f^[f^[f^[f^[f^[f'
 bindkey -s '^[9' '^A^[f^[f^[f^[f^[f^[f^[f^[f'
 
-source /usr/local/Cellar/fzf/0.17.3/shell/completion.zsh
-source /usr/local/Cellar/fzf/0.17.3/shell/key-bindings.zsh
+source /usr/local/Cellar/fzf/0.17.5/shell/completion.zsh
+source /usr/local/Cellar/fzf/0.17.5/shell/key-bindings.zsh
 
 function internal_ip() {
 	ifconfig | grep 'inet 10' | sed 's/^.*\(10\.[^ ]*\).*$/\1/' | head -1
@@ -60,12 +63,11 @@ function cd() {
 }
 cd .
 
-PATH=/usr/local/bin:$PATH:~/bin:~/personal_config/bin
 
 # zsh history
 HISTSIZE=50000               #How many lines of history to keep in memory
 HISTFILE=~/.zsh_history     #Where to save history to disk
-SAVEHIST=50000               #Number of history entries to save to disk
+SAVEHIST=5000000               #Number of history entries to save to disk
 #HISTDUP=erase               #Erase duplicates in the history file
 setopt    appendhistory     #Append history to the history file (no overwriting)
 setopt    sharehistory      #Share history across terminals
@@ -120,3 +122,5 @@ if [ -f '/Users/efirstenberg/work/gcloud/google-cloud-sdk/completion.zsh.inc' ];
 function notify() {
   osascript -e 'tell Application "Finder" to display dialog "Job finished" '
 }
+export PATH="/usr/local/opt/python36/bin:$PATH"
+alias gcp='gcp_switch'
