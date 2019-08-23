@@ -2,6 +2,9 @@
 	"segments": {
 		"right": [
 			{
+				"function": "powerline-gcloud.project"
+			},
+			{
 				"function": "powerline.segments.common.time.date",
 				"name": "time",
 				"args": {
