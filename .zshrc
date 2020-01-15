@@ -19,6 +19,7 @@ alias ls='ls -G'
 alias ll='ls -alF'
 alias vim='nvim'
 alias dc='docker-compose'
+alias proj='source ~/bin/project_switch'
 
 export PYTHONSTARTUP=~/.pythonrc
 
@@ -124,3 +125,4 @@ function notify() {
 }
 export PATH="/usr/local/opt/python36/bin:$PATH"
 alias gcp='gcp_switch'
+alias pkc='proxychains4 kubectl'
