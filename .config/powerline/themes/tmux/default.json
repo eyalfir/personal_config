@@ -2,7 +2,13 @@
 	"segments": {
 		"right": [
 			{
-				"function": "powerline-gcloud.project"
+				"function": "powerline_kubectl.tunnel_9050"
+			},
+			{
+				"function": "powerline_kubectl.context"
+			},
+			{
+				"function": "powerline_gcloud.project"
 			},
 			{
 				"function": "powerline.segments.common.time.date",
@@ -11,9 +17,6 @@
 					"format": "%H:%M",
 					"istime": true
 				}
-			},
-			{
-				"function": "powerline.segments.common.net.hostname"
 			}
 		]
 	}
